@@ -1,0 +1,361 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="pragma" content="no-cache" />
+<title>Subscription for Highlights for Children</title>
+<%@ include file="headIncludes.jsp" %>
+<%@ include file="orders_head_include.jsp" %>
+</head>
+<body onload="resetOnReload()">
+<div id="page">
+  <div class="pageInner1">
+
+    <div class="pageInner2">
+	  <%@ include file="headerInclude.jsp" %>
+      <div class="pageContent" id="cdsEngage">
+        <div id="tier1" class="tier"> <!-- formally div id=container -->
+          
+          <div class="orderProcWarning"> <img src="images/note-exclamation-icon.gif" />
+            <p class="warningText">Please note that magazine orders are processed separately.</p>
+            <p>If you have items in your shopping cart, you will need to use our merchandise checkout process after you complete your magazine or club order.  We apologize for any incovenience this may cause.</p>
+
+          </div>
+          <h1>Give the Gift of <span>Highlights Magazine</span></h1>
+          <div class="threeCol first"> <img src="images/covers/HFK-covers-01.jpg"/> </div>
+          <form name="engage" action="/servlet/Transaction" method="post">
+            <div class="threeCol" id="engageForm"> 
+              <!-- Open Error Section -->
+
+              <div id="error">
+                <$ERROR_ALL>
+              </div>
+              <!-- Close Error Section --> 
+              <!-- Open Subscriber Block -->
+              <div id="subscriberBlock">
+                <div id="subscriber">
+                  <h2>STEP 1: My Address and Payment Information</h2>
+					<fieldset>
+					<ol>
+						<li style="" class="">
+							<label for="cds_name" class="name">Full Name*</label>
+							<input name="cds_name" id="cds_name" class="name" value="" maxlength="27" type="text">
+						</li>
+						<li style="" class="">
+							<label for="cds_address_1" class="address1">Address*</label>
+							<input name="cds_address_1" id="cds_address_1" class="address1" value="" maxlength="27" type="text">
+						</li>
+						<li style="" class="">
+							<label for="cds_address_2" class="address2">&nbsp;</label>
+							<input name="cds_address_2" id="cds_address_2" class="address2" value="" maxlength="27" type="text">
+						</li>
+						<li style="" class="">
+							<label for="cds_city" class="city">City*</label>
+							<input name="cds_city" id="cds_city" class="city" value="" maxlength="13" type="text">
+						</li>
+						<li style="" class="" id="donor_state">
+							<label for="cds_state" class="state">State*<br></label>
+							<span id="subscriberStates">
+								<select name="cds_state" id="cds_state" class="state" size="1">
+									<option value="">Select A State</option>
+									<$CDS_STATE_LIST>
+								</select>
+							</span>
+						</li>
+						<li style="" class="">
+							<label for="cds_country" class="country">Country*<br></label>
+							<select name="cds_country" id="cds_country" class="country" size="1" onchange="javascript:displayDonorPostal(this.options[this.selectedIndex].value);">
+									<option value="Select">Select A Country</option>
+									<$CDS_COUNTRY_LIST>
+								</select>
+						</li>
+						<li style="" class="" id="donor_zip">
+							<label for="cds_zip" class="zip">Zip*<br></label>
+							<input name="cds_zip" id="cds_zip" class="zip" value="" maxlength="6" type="text">
+						</li>
+						<li style="" class="" id="donor_postal">
+							<label for="cds_postal" class="postal">Postal*<br></label>
+							<input name="cds_postal" id="cds_postal" class="postal" value="" maxlength="8" type="text">
+						</li>
+						<li style="" class="">
+							<label for="cds_zip" class="zip">Phone<br></label>
+							<input type="text" name="cds_phone_area_code" size="3" maxlength="3" value="" class="phone"/>-
+							<input type="text" name="cds_phone_prefix" size="3" maxlength="3" value="" class="phone"/>-
+							<input type="text" name="cds_phone_suffix" size="4" maxlength="4" value="" class="phone"/>
+						</li>
+						<li style="" class="">
+							<label for="cds_email" class="email">Email Address*</label>
+							<input name="cds_email" id="cds_email" class="email" value="" maxlength="50" type="text">
+						</li>
+						<li style="" class="optionalItem"><span class="removeOptionalItem"></span><div class="editable"><p>Your email address must be correct to receive your order confirmation</p></div>
+					</li>
+					</ol>
+					</fieldset>
+                  <h3>Select Your Payment Method</h3>
+				<fieldset>
+					<ol>
+						<li>
+							<label for="cds_pay_type">Card:</label>
+							<span id="subscriberPayTypes">
+							<select name="cds_pay_type" id="cds_pay_type" size="1">
+								<option value="">&#8212;Select Card&#8212;</option>
+								<option value="2">Visa</option>
+								<option value="1">Master Card</option>
+								<option value="3">American Express</option>
+								<option value="5">Discover</option>
+							</select>
+							</span>
+						</li>
+
+						<li class="creditOptions">
+							<label>Credit Card Number:</label>
+							<input name="cds_cc_number" id="cds_cc_number" autocomplete="off" value="" maxlength="16" class="cc_number">
+						</li>
+						<li class="creditOptions">
+							<label class="expire">Expiration Date:</label>
+								<select name="cds_cc_exp_month" id="cds_cc_exp_month">
+									<option value="">Month</option>
+									<option value="01">01</option>
+									<option value="02">02</option>
+									<option value="03">03</option>
+									<option value="04">04</option>
+									<option value="05">05</option>
+									<option value="06">06</option>
+									<option value="07">07</option>
+									<option value="08">08</option>
+									<option value="09">09</option>
+									<option value="10">10</option>
+									<option value="11">11</option>
+									<option value="12">12</option>
+								</select>
+								<select name="cds_cc_exp_year" id="cds_cc_exp_year">
+									<option value="">Year</option>
+									<$CDS_EXPIRE_YEAR_LIST>
+								</select>
+						</li>
+					</ol>
+				</fieldset>
+                </div>
+                <div id="subscriberOffers" class="termsAndValues block moveableBlock">
+					<fieldset>
+						<ol>
+							<li>
+								<span id="subscriberTermsAndValues">
+									<&TERMS_VALUES>
+								</span>
+							</li>
+						</ol>
+					</fieldset>
+				</div>
+              </div>
+              <!-- Close Subscriber Block --> 
+              <!-- Open Donee Checkbox --> 
+              <!-- Close Donee Checkbox -->
+
+              <div id="donees"> 
+                <!-- Open Donee Block -->
+                <div id="doneeOffers1" class="donee doneeTermsAndValues block moveableBlock">
+                  <h2>STEP 2: Recipient Information</h2>
+                   <h3>Choose an offer:</h3>
+					<fieldset>
+						<ol>
+							<li>
+								<span id="doneeTermsAndValues1">
+									<div id="usaTermsValues"> <!-- divs and individual TERMS_VALUES by STH 8/18/2010 -->
+										<div><&DONEE1_TERMS_VALUES1></div>
+										<div><&DONEE1_TERMS_VALUES2></div>
+										<div><&DONEE1_TERMS_VALUES3></div>
+									</div>
+									<div id="canTermsValues">
+										<div><&DONEE1_TERMS_VALUES4></div>
+										<div><&DONEE1_TERMS_VALUES5></div>
+										<div><&DONEE1_TERMS_VALUES6></div>
+									</div>
+									<div id="intTermsValues">
+										<div><&DONEE1_TERMS_VALUES7></div>
+										<div><&DONEE1_TERMS_VALUES8></div>
+										<div><&DONEE1_TERMS_VALUES9></div>
+									</div>					
+								</span>
+							</li>
+						</ol>
+					</fieldset>
+					<p id="AltPricingMsg1">See pricing for <a href="javascript:displayTerms('Canada')">Canadian addresses</a> or <a href="javascript:displayTerms('International')">International addresses</a>.</p>
+					<p id="AltPricingMsg2">See pricing for <a href="javascript:displayTerms('United States')">U.S. addresses</a> or <a href="javascript:displayTerms('International')">International addresses</a>.</p>
+					<p id="AltPricingMsg3">See pricing for <a href="javascript:displayTerms('United States')">U.S. addresses</a> or <a href="javascript:displayTerms('Canada')">Canadian addresses</a>.</p>
+                </div>
+                <input type="checkbox" name="popaddr2" id="cds_donee1" class="popaddr" />
+                <strong>Use My Address Information</strong>
+                <div id="donee1">
+				<fieldset>
+					<ol>
+						<li style="" class="">
+							<label for="cds_donee1_name" class="name">Full Name*</label>
+							<input name="cds_donee1_name" id="cds_donee1_name" class="name" value="" maxlength="27" type="text">
+						</li>
+
+						<li style="" class="">
+							<label for="cds_donee1_address_1" class="address1">Address*</label>
+							<input name="cds_donee1_address_1" id="cds_donee1_address_1" class="address1" value="" maxlength="27" type="text">
+						</li>
+						<li style="" class="">
+							<label for="cds_donee1_address_2" class="address2">&nbsp;</label>
+							<input name="cds_donee1_address_2" id="cds_donee1_address_2" class="address2" value="" maxlength="27" type="text">
+						</li>
+
+						<li style="" class="">
+							<label for="cds_donee1_city" class="city">City*</label>
+							<input name="cds_donee1_city" id="cds_donee1_city" class="city" value="" maxlength="13" type="text">
+						</li>
+						<li style="" class="" id="donee1_state">
+							<label for="cds_donee1_state" class="state">State*<br></label>
+							<span id="doneeStates1">
+								<select name="cds_donee1_state" id="cds_donee1_state" class="state" size="1">
+
+									<option value="">Select A State</option>
+									<$CDS_DONEE1_STATE_LIST>
+								</select>
+							</span>
+						</li>
+						
+						<li style="" class="">
+							<label for="cds_donee1_country" class="zip">Country*<br></label>
+							<select name="cds_donee1_country" id="cds_donee1_country" class="country" size="1" onchange="javascript:displayTerms(this.options[this.selectedIndex].value);">
+
+							<option value="Select">Select A Country</option>
+							<$CDS_DONEE1_COUNTRY_LIST>
+						</select>
+						</li>
+						<li style="" class="" id="donee1_zip">
+							<label for="cds_donee1_zip" class="zip">Zip*<br></label>
+							<input name="cds_donee1_zip" id="cds_donee1_zip" class="zip" value="" maxlength="6" type="text">
+
+						</li>
+						<li style="" class="" id="donee1_postal">
+							<label for="cds_donee1_postal" class="zip">Postal*<br></label>
+							<input name="cds_donee1_postal" id="cds_donee1_postal" class="postal" value="" maxlength="8" type="text">
+						</li>
+						<li style="" class="optionalItem"><span class="removeOptionalItem"></span><div class="editable">
+						<p>Fields marked with * are required</p>
+						<p>If you would like to order multiple subscriptions for one recipient, please contact <a href="http://www.highlights.com/contact-us" target="_blank">Customer Service</a>.</p></div>
+					</li>
+				</ol>
+			</fieldset>
+                </div>
+                <div id="giftAdd" class="block moveableBlock">
+                  <input name="next" id="giftAddButton" value="Add Another Recipient" type="submit">
+                </div>
+                <!-- Close Donee Block --> 
+              </div>
+
+              <!-- Open Gifts -->
+              <div id="giftBlock">
+                <div id="submitBlock" class="block moveableBlock">
+                  <input name="send" id="submit" src="images/blue_gloss_order_now.png" value="Send" type="image">
+                </div>
+                <div class="optionalBlock moveableBlock block">
+                  <div class="editable">
+                    <p>&nbsp;</p>
+                    <!--<p><span style="font-size: medium;"><span style="font-size: small;">For help with your order use our <a href="http://www.highlights.com/contact-us">Contact Us</a> form</span><strong><br>
+                      </strong></span></p>--> 
+                  </div>
+
+                </div>
+                <div id="giftsLoop" class="block moveableBlock"> <#IFDONOR>
+                  <h2>Your Recipient(s)</h2>
+                  <#ENDIF>
+                  <div id="gifts">
+                    <input type="hidden" name="cds_donee_seq_no" id="cds_donee_seq_no">
+                    <ol>
+                      <@LOOPDONEES>
+                      <li>
+
+                        <div>
+                          <input name="cds_donee_seq_no" type="hidden" value="<@DONEE_SEQ_NO>">
+                          <fieldset>
+                            <ol>
+                              <li>
+                                <@DONEE_NAME>
+                              </li>
+                              <li>
+                                <@DONEE_ADDRESS1>
+                              </li>
+
+                              <@IFNOTEMPTY_DONEE_ADDRESS2>
+                              <li>
+                                <@DONEE_ADDRESS2>
+                              </li>
+                              <@ENDIF>
+                              <li>
+                                <@DONEE_CITY>
+                                ,
+                                <@DONEE_STATE>
+                                &nbsp;&nbsp;
+                                <@DONEE_ZIP>
+                                <@DONEE_POSTAL_CODE>
+                              </li>
+
+                              <li>
+                                <@DONEE_COUNTRY>
+                              </li>
+                              <li>
+                                <@DONEE_TERM>
+                                Issues of
+                                <$MAG_NAME>
+                                for $
+                                <@DONEE_VALUE>
+                              </li>
+                              <li>
+                                <input name="delete" type="submit" class="deleteDonee" value="Cancel Recipient Order" onClick="deleteDonee('<@DONEE_SEQ_NO>');"/>
+                              </li>
+
+                            </ol>
+                          </fieldset>
+                        </div>
+                      </li>
+                      <@ENDLOOP>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Close Gifts --> 
+              <!-- Open Submit --> 
+              <!-- Close Submit --> 
+            </div>
+            <div class="threeCol last"><img src="/pubs/HI/HFK/images/HPcal-ad-2011.jpg" alt="Get a 2011 Hidden Pictures Calendar FREE with every order!"></div>
+          </form>
+        </div>
+      </div>
+	 <%@ include file="footerInclude.jsp" %>
+    </div>
+  </div>
+
+</div>
+<script language="JavaScript" src="https://media.highlights.com/js-hfcsite-sc/s_settings.js"></script>
+<script language="JavaScript" src="https://media.highlights.com/js-hfcsite-sc/s_code.js"></script>
+<script language="JavaScript" type="text/javascript">
+<!--
+var errors = "<$ERROR_ALL>";
+if (errors != ""){
+	s.pageName = "shop:mags:hfc:new subscription order entry error";
+	s.events = "event11";
+	s.eVar11 = "hfc new subscription order entry error";
+}else{
+	s.pageName = "shop:mags:hfc:HFK_DEFAULT_HOLIDAY order form";
+}
+s.channel="shop";
+s.prop1 = "shop:mags";
+s.prop2 = "shop:mags:hfc";
+s.prop34 = "checkout";
+s.campaign = "<$MISC4>";
+/************* DO NOT ALTER ANYTHING BELOW THIS LINE ! **************/ 
+var s_code=s.t();if(s_code)document.write(s_code);
+//--> 
+</script>
+<!-- Start - OneUpWeb -->
+<!-- www.oneupweb.com -->
+<script type="text/javascript" src="https://highlights.trk.sodoit.com/rts.js"></script>
+<!-- End - OneUpWeb -->
+</body>
+</html>

@@ -1,0 +1,612 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" />
+		<title>Adam Caouette, Designer</title>
+		<script language="javascript" src="js/jquery.js"></script>
+		<script language="javascript" src="js/thickbox.js"></script>
+		<script language="javascript" src="js/rollover.js"></script>
+		<link rel="stylesheet" href="css/styles.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="css/thickbox.css" type="text/css" media="screen" />
+		<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17494895-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();  
+
+  var timingvar;
+  
+function changeOrder(whichPortSet) {
+	
+	var selectorString = '#port'+whichPortSet+' div.portImages a';
+	//alert(selectorString);
+	var totalInSet = $(selectorString).length;
+	//alert(totalInSet);
+	if (totalInSet == 3) {
+		var topLevel = 30;
+		var bottomLevel = 10;
+	} else if (totalInSet == 2) {
+		var topLevel = 30;
+		var bottomLevel = 20;
+	} 
+	
+	for (i = 1; i <= totalInSet; i++) {
+		//alert('running '+i+' now...');
+		var currElement = '#port'+whichPortSet+' div.portImages div.portImage0'+i;
+		var currZ = $(currElement).css('z-index');
+		//alert('currZ is: '+currZ);
+		var parsedZ = parseInt(currZ);
+		var newZ = parsedZ+10;
+		if (currZ < topLevel) {
+			$(currElement).css('z-index',newZ);
+		} else {
+			$(currElement).css('z-index',bottomLevel);
+		}
+	}
+		
+}
+
+function showArrows(whichPortSet) {
+	/* DO NOT USE FOR NOW
+	var selectorString = '#port'+whichPortSet+' div.doublearrow-UR, #port'+whichPortSet+' div.doublearrow-LL';
+	$(selectorString).css('visibility','visible');
+	*/
+}
+
+function hideArrows(whichPortSet) {
+	/* DO NOT USE FOR NOW
+	var selectorString = '#port'+whichPortSet+' div.doublearrow-UR, #port'+whichPortSet+' div.doublearrow-LL';
+	$(selectorString).css('visibility','hidden');
+	*/
+}
+
+function setup() {
+	// put all run 1x setup items here
+	
+	
+	// run through all port sets
+	var totalPortSets = $('div.portImages').length;
+	
+	for (i = 0; i <= totalPortSets; i++) {
+		var whichPortSet = i;
+		var whichPortSetStr = "";
+		if (whichPortSet < 10) { // adds an "0" before single-digit numbers
+			whichPortSetStr = "0"+whichPortSet;
+		} else {
+			whichPortSetStr = whichPortSet;
+		}
+		whichPortSetStr = "#port"+whichPortSetStr;
+		//alert(whichPortSetStr);
+		// run through all port elements in each set
+		var selectorString = whichPortSetStr+" div.portImages a img";
+		var totalPortElements = $(selectorString).length;
+		var longestHeight = 0; // declare vars with dummy values
+		var widthForMarginLeft = 0; // declare vars with dummy values
+		
+		for (y = 1; y <= totalPortElements; y++) {
+			var whichPortElement = y;
+			
+			// change link references to hi-res real images
+			var whichImageID = "image"+whichPortSet+"-"+whichPortElement;
+			var whichImageRef = "images/"+whichPortSet+"-"+whichPortElement+".jpg"
+			//alert(whichImageID+" "+whichImageRef);
+			var objectToGet = document.getElementById(whichImageID);
+			objectToGet.src=whichImageRef;
+			
+			// get width and height of images
+			var selectorString = whichPortSetStr+" div.portImage0"+whichPortElement+" a img";
+			var thisElementWidth = $(selectorString).width();
+			var thisElementHeight = $(selectorString).height();
+			//alert("height of "+selectorString+"is: "+thisElementHeight);
+			// get longestHeight
+			if (longestHeight < thisElementHeight) {
+				longestHeight = thisElementHeight;
+			}
+			// get widthForMarginLeft
+			if (y == 1 && widthForMarginLeft < thisElementWidth) {
+				widthForMarginLeft = thisElementWidth+40;
+			} else if (y == 2 || y == 3) {
+				widthForMarginLeft = widthForMarginLeft+20
+			}
+			
+			// set #portXX div.portImageNN for each element's width, height, and background image
+			/*
+			var thisImageString = whichPortSetStr + " div.portImage0"+whichPortElement;
+			var thisElementWidthPlus = thisElementWidth + 42;
+			var thisElementHeightPlus = thisElementHeight + 40;
+			var thisElementBackgroundStyles = "url('images/"+whichPortSet+"-"+whichPortElement+".jpg') no-repeat 22px 20px"
+			$(thisImageString).css({
+			'width': thisElementWidthPlus+"px",
+			'height': thisElementHeightPlus+"px",
+			'background': thisElementBackgroundStyles
+			});
+			*/
+			
+			
+		}
+		
+		longestHeight = longestHeight+50;
+		longestHeight = longestHeight+"px";
+		// set #portXX for height
+		/*
+		$(whichPortSetStr).css({
+			'height': longestHeight
+			});
+		*/
+		//var testing = $(whichPortSetStr).css('height');
+		//alert(testing);
+		
+		// set #portXX .portText for left margin value
+		// var whichPortText = whichPortSetStr+" .portText"
+		// $(whichPortText).css('margin-left',widthForMarginLeft);
+		
+	}
+
+			
+			// set arrows selector strings
+			// var selectArrowsUR = whichPortSetStr+' div.portImages div.doublearrow-UR';
+			// var selectArrowsLL = whichPortSetStr+' div.portImages div.doublearrow-LL';
+			// set arrow graphic UR placement
+			// var arrowsURleftValue = thisFirstElementWidth+32; // this is 10 less than the 42 added to the width of the item
+			// var arrowsURleftValue = arrowsURleftValue+"px";
+			//$(selectArrowsUR).css('left',arrowsURleftValue);
+
+}
+
+
+
+
+
+$(document).ready(function() {
+		setup();
+
+		$('#topText a.more').click(function() {
+			$('#topText span.more').css('display','none');
+			$('#topText span.sentence-end').css('display','inline');
+			$('#topTextFull').slideDown('slow');
+
+			});
+			
+		$('#topTextFull a.more').click(function() {
+			$('#topTextFull').slideUp('slow');
+			$('#topText span.more').css('display','inline');
+			$('#topText span.sentence-end').css('display','none');
+			});
+		
+});
+
+function showAbout() {
+	$(document).ready(function() {
+		$('#topText span.more').css('display','none');
+		$('#topText span.sentence-end').css('display','inline');
+		$('#topTextFull').slideDown('slow');
+		scrollToTop();
+	});
+}
+
+function hideAbout() {
+	$(document).ready(function() {
+		$('#topTextFull').slideUp('slow');
+		$('#topText span.more').css('display','inline');
+		$('#topText span.sentence-end').css('display','none');
+		scrollToTop();
+	});
+}
+
+function scrollToTop() {
+	window.scrollTo(0,0);
+}
+  
+</script>
+
+	</head>
+
+	<body marginheight="0" marginwidth="0" topmargin="0" leftmargin="0">
+		<a name="top"></a>
+		<div id="floatingNav">
+			<a href="/index.html#top" onclick="javascript:hideAbout()"><h1 class="textAsImage">Studio Adam</h1></a>
+			<div id="floatingNavLinks">
+				<p><a href="#top" onclick="javascript:showAbout()">ABOUT</a></p>
+				<p><a href="#portfolio" >PORT-<br />FOLIO</a></p>
+				<p><a href="resume.html?height=800&width=760" onclick="javascript:hideAbout()" class="thickbox">RESUME</a></p>
+			</div>
+		</div>
+		<div class="totop"><a href="#top" onclick="javascript:scrollToTop()"><img src="images/toTop.png" /></a></div>
+		<div id="container"><!-- BEGIN CONTAINER DIV -->
+			
+			<div id="topText"><!-- BEGIN topText DIV -->
+				<h2 id="head01" class="textAsImage">Adam Caouette - Designer</h2>
+				<p>I am a professional designer with years of experience creating design solutions for both web and print.</p>
+				<p>I believe in providing online customers positive user experiences. My goal is to deliver clients' brand messages with useful and rewarding user-centered design, resulting in<span class="more">... <a href="#" class="more">read more about Adam <img src="images/arrow-dn.png" /></a></span><span class="sentence-end"> customer loyalty over time.</span></p>
+			</div><!-- END topText DIV -->
+			<div id="topTextFull"><!-- BEGIN topTextFull DIV -->
+				<h3>Experience</h3>
+								<ul class="firstcol"><li>visual design with brand consistency</li>
+									<li>web site architecture and content</li>
+									<li>web usability and user experience (UX)</li></ul>
+								<ul class="secondcol">
+									<li>web browser compatibility and QA testing</li>
+									<li>content management</li></ul>
+								<p style="clear:left;">In addition to screen-based work, I also have created clean and effective print designs for catalogs, brochures, and advertisements to clients' satisfaction while meeting goals and budgets.</p>
+				<h3>Technical Skills</h3>
+								<ul><li>Adobe Creative Suite (especially Photoshop, Illustrator, InDesign, Flash, Dreamweaver,
+Acrobat)</li>
+									<li>HTML, CSS, AJAX, Javascript,
+jQuery, PHP, JSP, MySQL</li>
+									<li>Content Management Systems (CMS) including MovableType, WordPress, Drupal</li>
+									</ul>
+									<p>Finally, I have proven myself to be an effective project manager, responsible for successfully leading teams to meet project deadlines on repeated occasions.</p>
+								<p><strong>If you need help arriving at the best combination of message and design to maximize response without sacrificing usability or common sense, contact me&mdash;I'm up for the challenge!</strong></p>
+								<p class="less"><a href="#" class="more">OK, I've read enough; hide all these words... <img src="images/arrow-up.png" /></a></p>
+			</div><!-- END topTextFull DIV -->
+			<a name="portfolio"></a>
+			<div id="portfolioSection"><!-- BEGIN portfolioSection DIV -->
+				<h2 id="head02" class="textAsImage">Portfolio</h2>
+				<p>View some of the work I have done as a <strong>Designer</strong> and <strong>Web / Interactive Developer</strong> below. Click on a stack of images to flip through them.<!--<a href="#">Art Director</a>, <a href="#">Designer</a>, or <a href="#">Web / Interactive Developer</a>.--></p>
+			</div><!-- END portfolioSection DIV -->
+			
+			<!-- ================== -->
+			
+			<div id="port00">
+				<div class="portImages">
+					<div class="portImage01">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/0-1.jpg" onClick="changeOrder('00');return false" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image0-1" src="images/0-1.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+					</div>
+					<div class="portImage02">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/0-2.jpg" onClick="changeOrder('00');return false" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image0-2" src="images/0-2.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+					</div>
+					<div class="portImage03">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/0-3.jpg" onClick="changeOrder('00');return false" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image0-3" src="images/0-3.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+					</div>
+				</div>
+				<div class="portText">
+					<div class="tabLabel"><img src="images/tablabel-Wdevelopment.png" /></div>
+					<h3>THE COLUMBUS D<span class="thinspace">&nbsp;</span>ISPATCH <br />Web Site</h3>
+					<p>Developed front-end interfaces for multiple sites using HTML, CSS, JSP, Javascript
+and jQuery.</p>
+					<h4>ACHIEVEMENTS</h4>
+					<ul><li>Coded main navigation menu with timed rollover and rollout functionality in jQuery</li>
+					<li>Assisted in migration of several sites to new CMS platform</li>
+					<li>Created style guides and site framework documentation (development standards and structure)</li></ul>
+					<h4>LINK TO LIVE SITE</h4>
+					<p><a href="http://www.dispatch.com" target="_blank" class="bluelink">www.dispatch.com</a></p>
+				</div>
+				<div class="clr"></div>
+			</div>	
+			
+			<!-- ================== -->
+			
+			<div id="port01">
+				<div class="portImages">
+					<div class="portImage01">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/1-1.jpg" onClick="changeOrder('01');return false" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image1-1" src="images/1-1.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+					</div>
+					<div class="portImage02">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/1-2.jpg" onClick="changeOrder('01');return false" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image1-2" src="images/1-2.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+					</div>
+					<div class="portImage03">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/1-3.jpg" onClick="changeOrder('01');return false" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image1-3" src="images/1-3.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+					</div>
+				</div>
+				<div class="portText">
+					<div class="tabLabel"><img src="images/tablabel-Wdesign.png" /></div>
+					<h3>HIGHLIGHTS FOR CHILDREN <br />Web Site</h3>
+					<p>Redesigned and maintained Highlights' online brand vehicle including ecommerce store and subscription support.</p>
+					<h4>ACHIEVEMENTS</h4>
+					<ul><li>Redesign of entire site (navigation, layout, graphics) helped increase overall site conversion by 0.9%</li>
+					<li>Coded site using HTML, CSS, Javascript and Drupal</li>
+					<li>Teamed with programmers to create the site back-end as well as search capability</li>
+					<li>Optimized content and META tags for search engines (SEO)</li></ul>
+					<!-- <h4>LINK TO LIVE SITE</h4>
+					<p><a href="http://www.highlights.com" target="_blank" class="bluelink">www.highlights.com</a></p> -->
+				</div>
+				<div class="clr"></div>
+			</div>	
+			
+			<!-- ================== -->
+			
+			<div id="port02">
+				<div class="portImages">
+					<div class="portImage01">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/2-1.jpg" onClick="changeOrder('02');return false" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image2-1" src="images/2-1th.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+					</div>
+					<div class="portImage02">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/2-2.jpg" onClick="changeOrder('02');return false" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image2-2" src="images/2-2th.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+					</div>
+				</div>
+				<div class="portText">
+					<div class="tabLabel"><img src="images/tablabel-Wdesign.png" /></div>
+					<h3>PUZZLEMANIA BOOK CLUB <br />Web Site</h3>
+					<p>Online promotional and companion site for a revamped Highlights product launch.</p>
+					<h4>ACHIEVEMENTS</h4>
+					<ul><li>Designed site (navigation, layout, graphics)</li>
+					<li>Coded site using HTML, CSS, Javascript and Drupal</li>
+					<li>Optimized content and META tags for search engines (SEO)</li>
+					<li>Redesigned and recoded Flash page flipper demo</li></ul>
+					<h4>LINK TO LIVE SITE</h4>
+					<p><a href="http://www.puzzlemania.com" target="_blank" class="bluelink">www.puzzlemania.com</a></p>
+				</div>
+				<div class="clr"></div>
+			</div>
+			
+			<!-- ================== -->
+			
+			<div id="port03">
+				<div class="portImages">
+					<div class="portImage01">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/3-1.jpg" onClick="changeOrder('03');return false" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image3-1" src="images/3-1th.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+					</div>
+					<div class="portImage02">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/3-2.jpg" onClick="changeOrder('03');return false" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image3-2" src="images/3-2th.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+					</div>
+				</div>
+				<div class="portText">
+					<div class="tabLabel"><img src="images/tablabel-Wdesign.png" /></div>
+					<h3>TEACHING K-8 MAGAZINE <br />Web Site</h3>
+					<p>Online version of <em>Teaching K-8</em> magazine, with multiple features and articles</p>
+					<h4>ACHIEVEMENTS</h4>
+					<ul><li>Designed entire site (navigation, layout, graphics)</li>
+					<li>Coded site using HTML, CSS, Javascript and Movable Type</li>
+					<li>Teamed with programmers to create the site back-end as well as search capability</li>
+					<li>Optimized content and META tags for search engines (SEO)</li>
+					<li>Assisted content manager with training in HTML and CSS skills</li></ul>
+					<!--<h4>LINK TO LIVE SITE</h4>
+					<p><a href="http://www.teachingk-8.com" target="_blank" class="bluelink">www.teachingk-8.com</a></p>-->
+				</div>
+				<div class="clr"></div>
+			</div>
+			
+			<!-- ================== -->
+			
+			<div id="port04">
+				<div class="portImages">
+					<div class="portImage01">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/4-1.jpg" onClick="changeOrder('04');return false" onMouseover="showArrows('04')" onMouseout="hideArrows('04')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image4-1" src="images/4-1th.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+					</div>
+					<div class="portImage02">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/4-2.jpg" onClick="changeOrder('04');return false" onMouseover="showArrows('04')" onMouseout="hideArrows('04')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image4-2" src="images/4-2th.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+					</div>
+					<div class="portImage03">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/4-3.jpg" onClick="changeOrder('04');return false" onMouseover="showArrows('04')" onMouseout="hideArrows('04')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image4-3" src="images/4-3th.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+					</div>
+				</div>
+				<div class="portText">
+					<div class="tabLabel"><img src="images/tablabel-Wdesign.png" /></div>
+					<h3>HIGHLIGHTS PARENTS <br />Web Site</h3>
+					<p>Content site for family resources and articles from Highlights for Children.</p>
+					<h4>ACHIEVEMENTS</h4>
+					<ul><li>Designed entire site (navigation, layout, graphics)</li>
+					<li>Coded site using HTML, CSS, and Movable Type</li>
+					<li>Optimized content and META tags for search engines (SEO)</li></ul>
+					<h4>LINK TO LIVE SITE</h4>
+					<p><a href="http://www.highlightsparents.com" target="_blank" class="bluelink">www.highlightsparents.com</a></p>
+				</div>
+				<div class="clr"></div>
+			</div>	
+			
+			<!-- ================== -->
+			
+			<div id="port05">
+				<div class="portImages">
+					<div class="portImage01">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/5-1.jpg" onClick="changeOrder('05');return false" onMouseover="showArrows('05')" onMouseout="hideArrows('05')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image5-1" src="images/5-1th.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+					</div>
+					<div class="portImage02">
+						<div class="shadowback-upper">
+							<div class="shadowback-UL"><a href="images/5-2.jpg" onClick="changeOrder('05');return false" onMouseover="showArrows('05')" onMouseout="hideArrows('05')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image5-2" src="images/5-2th.jpg"></a></div><div class="shadowback-UR"></div>
+						</div>
+						<div class="shadowback-lower">
+							<div class="shadowback-LL"></div><div class="shadowback-LR"></div>
+						</div>
+					</div>
+					<div class="portImage03">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/5-3.jpg" onClick="changeOrder('05');return false" onMouseover="showArrows('05')" onMouseout="hideArrows('05')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image5-3" src="images/5-3th.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+					</div>
+				</div>
+				<div class="portText">
+					<div class="tabLabel"><img src="images/tablabel-Wdesign.png" /></div>
+					<h3>I WAS A HIGHLIGHTS KID <br />Web Site</h3>
+					<p>Early social media 'blog' site to encourage the public to interact with the Highlights brand.</p>
+					<h4>ACHIEVEMENTS</h4>
+					<ul><li>Designed site (navigation, layout, graphics) to evoke nostaglia yet still look current</li>
+					<li>Coded site with XHTML, CSS, Javascript & Movable Type</li>
+					<li>Optimized content and META tags for search engines (SEO)</li></ul>
+					<!-- <h4>LINK TO LIVE SITE</h4>
+					<p><a href="http://www.iwasahighlightskid.com/" target="_blank" class="bluelink">www.iwasahighlightskid.com</a></p> -->
+				</div>
+				<div class="clr"></div>
+			</div>	
+			
+			
+			<!-- ================== -->
+			
+			<div id="port06">
+				<div class="portImages">
+					<div class="portImage01">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/6-1.jpg" onClick="changeOrder('06');return false" onMouseover="showArrows('06')" onMouseout="hideArrows('06')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image6-1" src="images/6-1th.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+					</div>
+				</div>
+				<div class="portText">
+					<div class="tabLabel"><img src="images/tablabel-Wdesign.png" /></div>
+					<h3>OLIVER KLEBAN SHOES <br />Web Site</h3>
+					<p>Online brochure for brick and mortar children's boutique shoe store</p>
+					<h4>ACHIEVEMENTS</h4>
+					<ul><li>Designed entire site (navigation, layout, graphics)</li>
+					<li>Coded site using HTML and CSS</li>
+					<li>Provided custom illustration and photography</li></ul>
+					<!--<h4>LINK TO LIVE SITE</h4>
+					<p><a href="http://www.highlightsparents.com" target="_blank" class="bluelink">www.highlightsparents.com</a></p>-->
+				</div>
+				<div class="clr"></div>
+			</div>	
+			
+			<!-- ================== -->
+			
+			<div id="port07">
+				<div class="portImages">
+					<div class="portImage01">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/7-1.jpg" onClick="changeOrder('07');return false" onMouseover="showArrows('07')" onMouseout="hideArrows('07')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image7-1" src="images/7-1th.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+					</div>
+					<div class="portImage02">
+						<div class="shadowback-upper">
+							<div class="shadowback-UL"><a href="images/7-2.jpg" onClick="changeOrder('07');return false" onMouseover="showArrows('07')" onMouseout="hideArrows('07')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image7-2" src="images/7-2th.jpg"></a></div><div class="shadowback-UR"></div>
+						</div>
+						<div class="shadowback-lower">
+							<div class="shadowback-LL"></div><div class="shadowback-LR"></div>
+						</div>
+					</div>
+					<div class="portImage03">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/7-3.jpg" onClick="changeOrder('07');return false" onMouseover="showArrows('07')" onMouseout="hideArrows('07')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image7-3" src="images/7-3th.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+					</div>
+				</div>
+				<div class="portText">
+					<div class="tabLabel"><img src="images/tablabel-Wdesign.png" /></div>
+					<h3>HIGHLIGHTS FOR CHILDREN <br />Promotional Emails</h3>
+					<p>Various graphic HTML emails over a 6 year period.</p>
+					<h4>ACHIEVEMENTS</h4>
+					<ul><li>Improved average click-through of holiday promotional email by 74% my first year (from single to double digit percentage)</li>
+					<li>Designed email and produced web-optimized graphics</li>
+					<li>Coded email with HTML and CSS to consistently appear the same in Yahoo, Gmail, Lotus Notes, et. al.</li>
+					<li>Tested layout and functionality on multiple email platforms and browsers</li>
+					<!--<li>Email #1 had the highest revenue and number of orders for all emails sent during that holiday season</li>--></ul>
+					<!--<h4>LINK TO LIVE SITE</h4>
+					<p><a href="http://www.highlightsparents.com" target="_blank" class="bluelink">www.highlightsparents.com</a></p>-->
+				</div>
+				<div class="clr"></div>
+			</div>	
+			
+			<!-- ================== -->
+			
+			<div id="port08">
+				<div class="portImages">
+					<div class="portImage01">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/8-1.jpg" onClick="changeOrder('08');return false" onMouseover="showArrows('08')" onMouseout="hideArrows('08')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image8-1" src="images/8-1th.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+					</div>
+				</div>
+				<div class="portText">
+					<div class="tabLabel"><img src="images/tablabel-Wdesign.png" /></div>
+					<h3>HIGHLIGHTS FOR CHILDREN <br />Banner Ads</h3>
+					<p>Various internet banner ads over a 6 year period.</p>
+					<h4>ACHIEVEMENTS</h4>
+					<ul><li>Designed and produced static, animated GIF, and Flash banner ads for
+varied types of programs and promotions</li>
+					<li>Created branded ads that garned attention despite the increase of "banner blindness" on web pages</li></ul>
+					<!--<h4>LINK TO LIVE SITE</h4>
+					<p><a href="http://www.highlightsparents.com" target="_blank" class="bluelink">www.highlightsparents.com</a></p>-->
+				</div>
+				<div class="clr"></div>
+			</div>	
+			
+			<!-- ================== -->
+			
+			<div id="port09">
+				<div class="portImages">
+					<div class="portImage01">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/9-1.jpg" onClick="changeOrder('09');return false" onMouseover="showArrows('09')" onMouseout="hideArrows('09')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image9-1" src="images/9-1th.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+					</div>
+				</div>
+				<div class="portText">
+					<div class="tabLabel"><img src="images/tablabel-design.png" /></div>
+					<h3>THE TIMOTHY FOUNDATION <br />Brochure</h3>
+					<p>6-panel, 2-color brochure</p>
+					<h4>ACHIEVEMENTS</h4>
+					<ul><li>Created a sophisticated yet clean design despite color limitations and no photography</li>
+					<li>Successfully balanced 2 colors to create eye-pleasing duotones</li></ul>
+					<!--<h4>LINK TO LIVE SITE</h4>
+					<p><a href="http://www.highlightsparents.com" target="_blank" class="bluelink">www.highlightsparents.com</a></p>-->
+				</div>
+				<div class="clr"></div>
+			</div>	
+			
+			<!-- ================== -->
+			
+			<div id="port10">
+				<div class="portImages">
+					<div class="portImage01">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/10-1.jpg" onClick="changeOrder('10');return false" onMouseover="showArrows('10')" onMouseout="hideArrows('10')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image10-1" src="images/10-1th.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+					</div>
+				</div>
+				<div class="portText">
+					<div class="tabLabel"><img src="images/tablabel-design.png" /></div>
+					<h3>CARROLL MANUFACTURING <br />Magazine Ad</h3>
+					<p>4-color full page ad for a commercial kitchen equipment manufacturer.</p>
+					<h4>ACHIEVEMENTS</h4>
+					<ul><li>Created eye-catching ad concept from headline provided by client</li>
+					<li>Created custom photo/illustration</li></ul>
+					<!--<h4>LINK TO LIVE SITE</h4>
+					<p><a href="http://www.highlightsparents.com" target="_blank" class="bluelink">www.highlightsparents.com</a></p>-->
+				</div>
+				<div class="clr"></div>
+			</div>
+			
+			<!-- ================== -->
+			
+			<div id="port11"><a name="information-architecture"></a>
+				<div class="portImages">
+					<div class="portImage01">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/11-1.jpg" onClick="changeOrder('11');return false" onMouseover="showArrows('11')" onMouseout="hideArrows('11')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image11-1" src="images/11-1.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+					</div>
+					<div class="portImage02">
+						<div class="shadowback-upper">
+							<div class="shadowback-UL"><a href="images/11-2.jpg" onClick="changeOrder('11');return false" onMouseover="showArrows('11')" onMouseout="hideArrows('11')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image11-2" src="images/11-2th.jpg"></a></div><div class="shadowback-UR"></div>
+						</div>
+						<div class="shadowback-lower">
+							<div class="shadowback-LL"></div><div class="shadowback-LR"></div>
+						</div>
+					</div>
+					<div class="portImage03">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/11-3.jpg" onClick="changeOrder('11');return false" onMouseover="showArrows('11')" onMouseout="hideArrows('11')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image11-3" src="images/11-3th.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+					</div>
+				</div>
+				<div class="portText">
+					<div class="tabLabel"><img src="images/tablabel-infoarch.png" /></div>
+					<h3>Wireframe Documents</h3>
+					<p>Examples of various information architecture and schematic documents</p>
+					<h4>ACHIEVEMENTS</h4>
+					<ul><li>Organized large-scale site information into easy to understand diagrams</li>
+					<li>Comprehensively planned and documented web functionality</li>
+					<li>Successfully communicated this information to executive stakeholders in person</li></ul>
+					<!--<h4>LINK TO LIVE SITE</h4>
+					<p><a href="http://www.highlightsparents.com" target="_blank" class="bluelink">www.highlightsparents.com</a></p>-->
+					<p class="info-under-tab"><a href="images/11-1lg.jpg" target="_blank">View Example 1 larger</a><br /><a href="images/11-2lg.jpg" target="_blank">View Example 2 larger</a><br /><a href="images/11-3lg.jpg" target="_blank">View Example 3 larger</a></p>
+				</div>
+				<div class="clr"></div>
+			</div>
+			
+		</div><!-- END CONTAINER DIV -->
+
+	</body>
+
+</html>
+
+

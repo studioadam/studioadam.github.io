@@ -1,0 +1,1294 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" />
+		<title>Adam Caouette, Designer</title>
+		<script language="javascript" src="js/jquery.js"></script>
+		<script language="javascript" src="js/thickbox.js"></script>
+		<script language="javascript" src="js/rollover.js"></script>
+		<link rel="stylesheet" href="css/thickbox.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="Xcss/home.css" type="text/css" media="screen" />
+		<script type="text/javascript">
+/*
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17494895-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();  */
+
+  var timingvar;
+  
+function changeOrder(whichPortSet) {
+	
+	var selectorString = '#port'+whichPortSet+' div.portImages a';
+	//alert(selectorString);
+	var totalInSet = $(selectorString).length;
+	//alert(totalInSet);
+	if (totalInSet == 3) {
+		var topLevel = 30;
+		var bottomLevel = 10;
+	} else if (totalInSet == 2) {
+		var topLevel = 30;
+		var bottomLevel = 20;
+	} 
+	
+	for (i = 1; i <= totalInSet; i++) {
+		//alert('running '+i+' now...');
+		var currElement = '#port'+whichPortSet+' div.portImages div.portImage0'+i;
+		var currZ = $(currElement).css('z-index');
+		//alert('currZ is: '+currZ);
+		var parsedZ = parseInt(currZ);
+		var newZ = parsedZ+10;
+		if (currZ < topLevel) {
+			$(currElement).css('z-index',newZ);
+		} else {
+			$(currElement).css('z-index',bottomLevel);
+		}
+	}
+		
+}
+
+function showArrows(whichPortSet) {
+	/* DO NOT USE FOR NOW
+	var selectorString = '#port'+whichPortSet+' div.doublearrow-UR, #port'+whichPortSet+' div.doublearrow-LL';
+	$(selectorString).css('visibility','visible');
+	*/
+}
+
+function hideArrows(whichPortSet) {
+	/* DO NOT USE FOR NOW
+	var selectorString = '#port'+whichPortSet+' div.doublearrow-UR, #port'+whichPortSet+' div.doublearrow-LL';
+	$(selectorString).css('visibility','hidden');
+	*/
+}
+
+function setup() {
+	// put all run 1x setup items here
+	
+	
+	// run through all port sets
+	var totalPortSets = $('div.portImages').length;
+	
+	for (i = 1; i <= totalPortSets; i++) {
+		var whichPortSet = i;
+		var whichPortSetStr = "";
+		if (whichPortSet < 10) { // adds an "0" before single-digit numbers
+			whichPortSetStr = "0"+whichPortSet;
+		} else {
+			whichPortSetStr = whichPortSet;
+		}
+		whichPortSetStr = "#port"+whichPortSetStr;
+		//alert(whichPortSetStr);
+		// run through all port elements in each set
+		var selectorString = whichPortSetStr+" div.portImages a img";
+		var totalPortElements = $(selectorString).length;
+		var longestHeight = 0; // declare vars with dummy values
+		var widthForMarginLeft = 0; // declare vars with dummy values
+		
+		for (y = 1; y <= totalPortElements; y++) {
+			var whichPortElement = y;
+			
+			// change link references to hi-res real images
+			var whichImageID = "image"+whichPortSet+"-"+whichPortElement;
+			var whichImageRef = "images/"+whichPortSet+"-"+whichPortElement+".jpg"
+			//alert(whichImageID+" "+whichImageRef);
+			var objectToGet = document.getElementById(whichImageID);
+			objectToGet.src=whichImageRef;
+			
+			// get width and height of images
+			var selectorString = whichPortSetStr+" div.portImage0"+whichPortElement+" a img";
+			var thisElementWidth = $(selectorString).width();
+			var thisElementHeight = $(selectorString).height();
+			alert("height of "+selectorString+" is: "+thisElementHeight);
+			// get longestHeight
+			if (longestHeight < thisElementHeight) {
+				longestHeight = thisElementHeight;
+			}
+			// get widthForMarginLeft
+			if (y == 1 && widthForMarginLeft < thisElementWidth) {
+				widthForMarginLeft = thisElementWidth+40;
+			} else if (y == 2 || y == 3) {
+				widthForMarginLeft = widthForMarginLeft+20
+			}
+			
+			// set #portXX div.portImageNN for each element's width, height, and background image
+			var thisImageString = whichPortSetStr + " div.portImage0"+whichPortElement;
+			var thisElementWidthPlus = thisElementWidth + 42;
+			var thisElementHeightPlus = thisElementHeight + 40;
+			var thisElementBackgroundStyles = "url('images/"+whichPortSet+"-"+whichPortElement+".jpg') no-repeat 22px 20px"
+			$(thisImageString).css({
+			'width': thisElementWidthPlus+"px",
+			'height': thisElementHeightPlus+"px",
+			'background': thisElementBackgroundStyles
+			});
+			
+			
+		}
+		
+		longestHeight = longestHeight+50;
+		longestHeight = longestHeight+"px";
+		// set #portXX for height
+			$(whichPortSetStr).css({
+			'height': longestHeight
+			});
+		var testing = $(whichPortSetStr).css('height');
+		//alert(testing);
+		
+		// set #portXX .portText for left margin value
+		var whichPortText = whichPortSetStr+" .portText"
+		$(whichPortText).css('margin-left',widthForMarginLeft);
+		
+	}
+
+			
+			// set arrows selector strings
+			// var selectArrowsUR = whichPortSetStr+' div.portImages div.doublearrow-UR';
+			// var selectArrowsLL = whichPortSetStr+' div.portImages div.doublearrow-LL';
+			// set arrow graphic UR placement
+			// var arrowsURleftValue = thisFirstElementWidth+32; // this is 10 less than the 42 added to the width of the item
+			// var arrowsURleftValue = arrowsURleftValue+"px";
+			//$(selectArrowsUR).css('left',arrowsURleftValue);
+
+}
+
+
+
+
+
+$(document).ready(function() {
+		setup();
+
+		$('#topText a.more').click(function() {
+			$('#topText span.more').css('display','none');
+			$('#topText span.sentence-end').css('display','inline');
+			$('#topTextFull').slideDown('slow');
+
+			});
+			
+		$('#topTextFull a.more').click(function() {
+			$('#topTextFull').slideUp('slow');
+			$('#topText span.more').css('display','inline');
+			$('#topText span.sentence-end').css('display','none');
+			});
+		
+});
+
+function showAbout() {
+	$(document).ready(function() {
+		$('#topText span.more').css('display','none');
+		$('#topText span.sentence-end').css('display','inline');
+		$('#topTextFull').slideDown('slow');
+	});
+}
+
+function hideAbout() {
+	$(document).ready(function() {
+		$('#topTextFull').slideUp('slow');
+		$('#topText span.more').css('display','inline');
+		$('#topText span.sentence-end').css('display','none');
+	});
+}
+
+
+
+  
+</script>
+
+<style type="text/css">
+/* basic elements */
+
+html
+{
+   margin: 0;
+   /* setting border: 0 kills ie6 win window inner well border */
+   padding: 0;
+}
+
+body
+{
+   margin: 0;
+   /* setting border: 0 kills ie5 win window inner well border */
+   padding: 0;
+   font-family: Trebuchet MS, Arial, Geneva, sans-serif;
+   font-size: 13px;
+   line-height: 17px;
+   min-width:940px;
+}
+
+form, input { margin: 0; padding: 0; }
+
+a img { border: 0; }
+
+h1, h2, h3, h4, h5, h6 
+{
+margin:10px 0 10px 0;
+font-family: Trebuchet MS, Helvetica, sans-serif;
+font-weight: bold;
+color:black;
+}
+
+p, ol, ul, pre, blockquote
+{
+   margin-top: 10px;
+   margin-bottom: 10px;
+}
+
+h1
+{
+font-size: 20px;
+line-height: 23px;
+}
+
+h2
+{
+font-size: 15px;
+line-height: 18px;
+}
+
+tbody {
+border:none;
+}
+
+/*==============*/
+/* general classes */
+/*==============*/
+
+
+.clr
+{
+   clear: both;
+   overflow: hidden;
+   width: 1px;
+   height: 1px;
+   margin: 0 -1px -1px 0;
+   border: 0;
+   padding: 0;
+   font-size: 0;
+   line-height: 0;
+}
+
+a:link
+{
+color:#545e97;
+}
+
+a:visited
+{
+color:#7b84b7;
+}
+
+#topText a:link, #topTextFull a:link, #portfolioSection a:link
+{
+color:#b2b7d5;
+}
+
+#topText a:visited, #topTextFull a:visited, #portfolioSection a:visited
+{
+color:#cbcfe5;
+}
+
+a.hoverunderline:link, a.hoverunderline:visited {
+	text-decoration: none;
+}
+a.hoverunderline:hover, a.hoverunderline:active {
+	text-decoration: underline;
+}
+
+a.nounderline:link, a.nounderline:visited,
+a.nounderline:hover, a.nounderline:active {
+	text-decoration: none;
+}
+
+ul { 
+	list-style-position: outside; 
+	margin: 0px; 
+	padding-left: 28px; 
+	list-style-type: disc; 
+	vertical-align: middle; 
+}
+
+li { 
+	margin: 0px; 
+	padding: 0em 0 0.3em 0; 
+}
+
+/* .pkg class wraps enclosing block element around inner floated elements */
+.pkg:after
+{
+   content: " ";
+   display: block;
+   visibility: hidden;
+   clear: both;
+   height: 0.1px;
+   font-size: 0.1em;
+   line-height: 0;
+}
+* html .pkg { display: inline-block; }
+/* no ie mac \*/
+* html .pkg { height: 1%; }
+.pkg { display: block; }
+/* */
+	
+body {
+background: #444444 url('images/graybackground.jpg') repeat left top;
+}
+
+#container {
+	
+}
+
+	
+	#floatingNav {
+background: url('images/navstripe.png') no-repeat;
+width:75px;
+height:476px;
+padding:0px;
+position:fixed;
+top:0px;
+left:0px;
+z-index:99;
+}
+
+.textAsImage {
+	overflow:hidden !important;
+	text-align:left !important;
+	text-indent:-9999em !important;
+	background-repeat:no-repeat;
+}
+
+#floatingNav h1 {
+	background: url('images/studioadam-hd.png') no-repeat;
+width: 40px;
+height: 206px;
+margin:26px 0 0 13px;
+}
+
+#floatingNavLinks {
+width:62px;
+margin-top:140px;
+text-align:center;
+}
+
+#floatingNav p {
+margin:0 auto 10px auto;
+width:62px;
+text-align:center;
+font-family: Trebuchet MS, Helvetica, sans-serif;
+font-weight: normal;
+font-size:11px;
+line-height:13px;
+}
+
+#floatingNav p a {
+color:#FFFFFF;
+}
+
+div.totop {
+position:fixed;
+bottom:12px;
+right:18px;
+z-index:99;
+}
+
+#topTextFull h3 {
+padding-top:10px;
+}
+
+#topTextFull {
+display:none;
+position:relative;
+top:-20px;
+}
+
+span.sentence-end {
+display:none;
+}
+
+
+#topText, #topTextFull, #portfolioSection {
+margin:0 0 0 72px;
+z-index:10;
+padding-top:10px;
+}
+
+#topText p, #topTextFull p, #topTextFull h2, #topTextFull h3, #portfolioSection p, #topTextFull ul {
+width:700px;
+color:#ececec;
+padding-left:20px;
+}
+
+#topTextFull ul.firstcol {
+width:350px; 
+color:#ececec;
+margin-left:20px;
+margin-bottom:14px;
+padding-left:40px;
+float:left;
+}
+
+#topTextFull ul.secondcol {
+width:350px;
+float:left;
+margin-bottom:14px;
+padding-left:0px;
+}
+
+#topTextFull p.less {
+padding-top:14px;
+}
+
+#topTextFull strong {
+color:white;
+font-weight:bold;
+}
+
+#topTextFull ul {
+list-style-position: outside; 
+	margin: 0px; 
+	padding-left: 60px;
+	list-style-type: disc; 
+	vertical-align: middle; 
+}
+
+#head01, #head01Full {
+	background: url('images/adamcaouette-hd.png') no-repeat;
+height: 46px;
+}
+
+#head02 {
+	background: url('images/portfolio-hd.png') no-repeat;
+height: 46px;
+margin-top:20px;
+}
+
+#port01, #port02, #port03, #port04, #port05, #port06, #port07, #port08, #port09, #port10, #port11, #port12, #port13, #port14, #port15, #port16, #port17, #port18, #port19, #port20, #port21 {
+margin:30px 0 0 72px;
+position:relative;
+display:block;
+font-size:12px;
+line-height:15px;
+}
+
+#port01, #port02, #port03, #port04, #port05, #port06, #port07, #port08, #port09, #port10, #port11, #port12, #port13, #port14, #port15, #port16, #port17, #port18, #port19, #port20, #port21 {
+background: url('images/tab-medium.png') no-repeat 424px 0px;
+width:874px;
+}
+
+
+#port01 div.portImage01 {
+width:602px; /* MUST GET IMAGE WIDTH AND ADD 42PX TO IT */
+height:821px; /* MUST GET IMAGE HEIGHT AND ADD 40PX TO IT */
+background: url('images/1-1.jpg') no-repeat 22px 20px;
+}
+
+#port01 div.portImage02 {
+width:602px; /* MUST GET IMAGE WIDTH AND ADD 42PX TO IT */
+height:550px; /* MUST GET IMAGE HEIGHT AND ADD 40PX TO IT */
+background: url('images/1-2.jpg') no-repeat 22px 20px;
+}
+
+#port01 div.portImage03 {
+width:602px; /* MUST GET IMAGE WIDTH AND ADD 42PX TO IT */
+height:747px; /* MUST GET IMAGE HEIGHT AND ADD 40PX TO IT */
+background: url('images/1-3.jpg') no-repeat 22px 20px;
+}
+
+
+#port02 div.portImage01 {
+width:602px; /* MUST GET IMAGE WIDTH AND ADD 42PX TO IT */
+height:492px; /* MUST GET IMAGE HEIGHT AND ADD 40PX TO IT */
+background: url('images/2-1.jpg') no-repeat 22px 20px;
+}
+
+#port02 div.portImage02 {
+width:602px; /* MUST GET IMAGE WIDTH AND ADD 42PX TO IT */
+height:570px; /* MUST GET IMAGE HEIGHT AND ADD 40PX TO IT */
+background: url('images/2-2.jpg') no-repeat 22px 20px;
+}
+
+.shadowback-upper, .shadowback-lower {
+height:50%;
+}
+
+.shadowback-UL {
+float:left;
+overflow:visible;
+width:50%;
+height:100%;
+background: url('images/shadowbackedges.png') no-repeat left top;
+}
+.shadowback-UL img{
+margin:20px auto auto 23px;
+position:relative;
+}
+.shadowback-UR {
+float:left;
+width:50%;
+height:100%;
+background: url('images/shadowbackedges.png') no-repeat right top;
+}
+.shadowback-LL {
+float:left;
+width:50%;
+height:100%;
+background: url('images/shadowbackedges.png') no-repeat left bottom;
+}
+.shadowback-LR {
+float:left;
+width:50%;
+height:100%;
+background: url('images/shadowbackedges.png') no-repeat right bottom;
+}
+
+.portImages {
+position:relative;
+}
+.portImage01 {
+position:absolute;
+z-index:30;
+}
+
+.portImage02 {
+position:absolute;
+top:20px;
+left:20px;
+z-index:20;
+}
+
+.portImage03 {
+position:absolute;
+top:40px;
+left:40px;
+z-index:10;
+}
+
+.portImages {
+float:left;
+}
+
+.portText {
+margin-left:640px;
+margin-right:50px;
+}
+
+.tabLabel {
+float:right;
+margin: 40px 30px 20px 4px;
+}
+
+h3.portText {
+font-size:13px;
+padding-top:50px;
+}
+
+h4.portText {
+margin-top:0px;
+margin-bottom:4px;
+}
+
+p.portText, ul.portText {
+margin-top:0px;
+margin-bottom:12px;
+}
+
+ul.portText li {
+margin-top:0px;
+margin-bottom:6px;
+margin-left:-14px;
+}
+
+.doublearrow-UR {
+margin-left:602px;
+z-index:50;
+float:left;
+position:relative;
+visibility:hidden;
+}
+
+.doublearrow-LL {
+float:left;
+position:relative;
+top:-30px;
+left:-4px;
+visibility:hidden;
+}
+
+
+#portlargenavbar {
+width:880px;
+display:table;
+border-bottom:1px solid gray;
+}
+
+#portlargenavbar div {
+margin:0;
+padding:0;
+}
+
+#portlargenavbar div.title {
+width:100%;
+color:#DDDDDD;
+text-align:center;
+font-family: Trebuchet MS, Arial, Geneva, sans-serif;
+}
+
+#portlargebox {
+width:900px;
+margin:0 auto;
+}
+
+#portimagelarge {
+width:550px;
+}
+
+
+.resumepage {
+background-image:url('images/resumeback.jpg');
+background-repeat: repeat;
+background-position: center top;
+margin:18px 50px 20px 30px;
+padding:40px 40px;
+font-size:13px;
+line-height:17px;
+}
+
+.leftcolumn {
+float:left;
+padding-right:30px;
+width:190px;
+text-align:right;
+}
+
+#TB_ajaxContent .leftcolumn h1,
+#TB_ajaxContent .leftcolumn h2,
+#TB_ajaxContent .leftcolumn p {
+margin:0;
+padding:0;
+text-align:right;
+}
+
+.downloadresume {
+width:120px;
+margin:0 0 0 auto;
+}
+
+.downloadresume div {
+margin-top:20px;
+}
+
+.resumecopyblock {
+float:left;
+padding-top:36px;
+width:520px;
+}
+
+.resumecopyblock p {
+margin-bottom:2px;
+margin-top:0px;
+}
+
+.resumecopyblock ul {
+	margin-left:0px;
+	list-style-image: url('images/reversebullet.gif');
+}
+
+.resumecopyblock li {
+	padding: 0 0 0 4px;
+	margin: 0 0 0 12px;
+}
+
+.resumecopyblock li.jobbullets {
+	padding: 0 0 0 4px;
+	margin: 0 0 4px 0px;
+}
+
+.resumetopic {
+	font-size: 14px;
+	letter-spacing: 0.05em;
+padding-top:10px;
+color:#603400;
+}
+
+.innerresumebox {
+}
+
+.innerresumebox h2.resumetopic {
+padding-top:4px;
+}
+
+.expertise {
+}
+
+.skills {
+}
+
+
+p.jobdate {
+	font-size: 13px;
+	font-style:italic;
+	margin-bottom: 0px;
+margin-top:8px;
+	float: right;
+}
+
+p.jobtitle {
+	font-size: 13px;
+	font-weight:bold;
+	margin-bottom: 0px;
+margin-top:8px;
+}
+
+#TB_window p.companyname {
+line-height:12px;
+padding-top:0;
+}
+
+</style>
+	</head>
+
+	<body marginheight="0" marginwidth="0" topmargin="0" leftmargin="0">
+		<a name="top"></a>
+		<div id="floatingNav">
+			<a href="#top" onclick="javascript:hideAbout()"><h1 class="textAsImage">Studio Adam</h1></a>
+			<div id="floatingNavLinks">
+				<p><a href="#top" onclick="javascript:showAbout()">ABOUT</a></p>
+				<p><a href="#portfolio" onclick="javascript:hideAbout()">PORT-<br />FOLIO</a></p>
+				<p><a href="resume.html?height=800&width=760" onclick="javascript:location.href='index.html#top'" class="thickbox">RESUME</a></p>
+			</div>
+		</div>
+		<div class="totop"><a href="#top"><img src="images/toTop.png" /></a></div>
+		<div id="container"><!-- BEGIN CONTAINER DIV -->
+			<div id="topText"><!-- BEGIN topText DIV -->
+				<h2 id="head01" class="textAsImage">Adam Caouette - Designer</h2>
+				<p>I am a senior-level designer with 13 years experience creating professional design solutions for both web and print.</p>
+				<p>I believe in providing online customers positive user experiences. My goal is to deliver clients' brand messages with useful and rewarding user-centered design, resulting in<span class="more">... <a href="#" class="more">read more about Adam <img src="images/arrow-dn.png" /></a></span><span class="sentence-end"> customer loyalty over time.</span></p>
+			</div><!-- END topText DIV -->
+			<div id="topTextFull"><!-- BEGIN topTextFull DIV -->
+				<h3>Experience</h3>
+								<ul class="firstcol"><li>visual design with brand consistency</li>
+									<li>web site architecture and content</li>
+									<li>web usability and user experience (UX)</li></ul>
+								<ul class="secondcol"><li>search engine optimization (SEO)</li>
+									<!--<li>site implementation</li>-->
+									<li>web browser compatibility and QA testing</li>
+									<li>content management</li></ul>
+									<p>In addition to screen-based work, I also have created clean and effective print designs for catalogs, brochures, and advertisements to clients' satisfaction while meeting goals and budgets.</p>
+								<h3>Technical Skills</h3>
+								<ul><li>Adobe Creative Suite (Photoshop, Illustrator, Flash, Acrobat, InDesign, Dreamweaver)</li>
+									<li>XHTML, CSS, AJAX, JavaScript, Actionscript, some PHP and JSP</li>
+									<li>Content Management Systems (CMS) including MovableType, WordPress, Drupal</li>
+									<li>Video Editing, Photography</li></ul>
+									<p>Finally, I have proven myself to be an effective project manager, responsible for successfully leading teams to meet project deadlines on repeated occasions.</p>
+								<p><strong>If you need help arriving at the best combination of message and design to maximize response without sacrificing usability or common sense, contact me&mdash;I'm up for the challenge!</strong></p>
+								<p class="less"><a href="#" class="more">OK, I've read enough; hide all these words... <img src="images/arrow-up.png" /></a></p>
+			</div><!-- END topTextFull DIV -->
+			<a name="portfolio"></a>
+			<div id="portfolioSection"><!-- BEGIN portfolioSection DIV -->
+				<h2 id="head02" class="textAsImage">Portfolio</h2>
+				<p>View some of the work I have done as an <strong>Art Director</strong>, <strong>Designer</strong>, or <strong>Web / Interactive Developer</strong>.<!--<a href="#">Art Director</a>, <a href="#">Designer</a>, or <a href="#">Web / Interactive Developer</a>.--></p>
+			</div><!-- END portfolioSection DIV -->
+			
+			<!-- ================== -->
+			
+			<div id="port01">
+				<div class="portImages">
+					<div class="portImage01">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/1-1.jpg" onClick="changeOrder('01');return false" onMouseover="showArrows('01')" onMouseout="hideArrows('01')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image1-1" src="images/1-1.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+						<div class="doublearrow-LL"><img src="images/doublearrow-LL.png"></div>
+					</div>
+					<div class="portImage02">
+						<div class="shadowback-upper">
+							<div class="shadowback-UL"><a href="images/1-2.jpg" onClick="changeOrder('01');return false" onMouseover="showArrows('01')" onMouseout="hideArrows('01')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image1-2" src="images/1-2.jpg"></a></div><div class="shadowback-UR"></div>
+						</div>
+						<div class="shadowback-lower">
+							<div class="shadowback-LL"></div><div class="shadowback-LR"></div>
+						</div>
+					</div>
+					<div class="portImage03">
+						<div class="shadowback-upper">
+							<div class="shadowback-UL"><a href="images/1-3.jpg" onClick="changeOrder('01');return false" onMouseover="showArrows('01')" onMouseout="hideArrows('01')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image1-3" src="images/1-3.jpg"></a></div><div class="shadowback-UR"></div>
+						</div>
+						<div class="shadowback-lower">
+							<div class="shadowback-LL"></div><div class="shadowback-LR"></div>
+						</div>
+					</div>
+				</div>
+				<div class="tabLabel"><img src="images/tablabel-Wdesign.png" /></div>
+				<div class="doublearrow-UR"><img src="images/doublearrow-UR.png"></div>
+				<h3 class="portText">HIGHLIGHTS FOR CHILDREN <br />Web Site</h3>
+					<p class="portText">Redesigned and maintained Highlights' online brand vehicle including ecommerce store and subscription support.</p>
+					<h4 class="portText">ACHIEVEMENTS</h4>
+					<ul class="portText"><li>Redesign of entire site (navigation, layout, graphics) helped increase overall site conversion by 0.9%</li>
+					<li>Coded site using HTML, CSS, Javascript and Drupal</li>
+					<li>Teamed with programmers to create the site back-end as well as search capability</li>
+					<li>Optimized content and META tags for search engines (SEO)</li></ul>
+					<h4 class="portText">LINK TO LIVE SITE</h4>
+					<p class="portText"><a href="http://www.highlights.com" target="_blank" class="bluelink">www.highlights.com</a></p>
+				<div class="clr"></div>
+			</div>	
+			
+			<!-- ================== -->
+			
+			<div id="port02">
+				<div class="portImages">
+					<div class="portImage01">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/2-1.jpg" onClick="changeOrder('02');return false" onMouseover="showArrows('02')" onMouseout="hideArrows('02')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image2-1" src="images/2-1.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+						<div class="doublearrow-LL"><img src="images/doublearrow-LL.png"></div>
+					</div>
+					<div class="portImage02">
+						<div class="shadowback-upper">
+							<div class="shadowback-UL"><a href="images/2-2.jpg" onClick="changeOrder('02');return false" onMouseover="showArrows('02')" onMouseout="hideArrows('02')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image2-2" src="images/2-2.jpg"></a></div><div class="shadowback-UR"></div>
+						</div>
+						<div class="shadowback-lower">
+							<div class="shadowback-LL"></div><div class="shadowback-LR"></div>
+						</div>
+					</div>
+				</div>
+				<div class="tabLabel"><img src="images/tablabel-Wdesign.png" /></div>
+				<div class="doublearrow-UR"><img src="images/doublearrow-UR.png"></div>
+				<h3 class="portText">PUZZLEMANIA BOOK CLUB <br />Web Site</h3>
+					<p class="portText">Online promotional and companion site for a revamped Highlights product launch.</p>
+					<h4 class="portText">ACHIEVEMENTS</h4>
+					<ul class="portText"><li>Designed site (navigation, layout, graphics)</li>
+					<li>Coded site using HTML, CSS, Javascript and Drupal</li>
+					<li>Optimized content and META tags for search engines (SEO)</li>
+					<li>Redesigned and recoded Flash page flipper demo</li></ul>
+					<h4 class="portText">LINK TO LIVE SITE</h4>
+					<p class="portText"><a href="http://www.puzzlemania.com" target="_blank" class="bluelink">www.puzzlemania.com</a></p>
+				<div class="clr"></div>
+			</div>
+			
+			<!-- ================== -->
+			
+			<div id="port03">
+				<div class="portImages">
+					<div class="portImage01">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/3-1.jpg" onClick="changeOrder('03');return false" onMouseover="showArrows('03')" onMouseout="hideArrows('03')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image3-1" src="images/3-1th.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+						<div class="doublearrow-LL"><img src="images/doublearrow-LL.png"></div>
+					</div>
+					<div class="portImage02">
+						<div class="shadowback-upper">
+							<div class="shadowback-UL"><a href="images/3-2.jpg" onClick="changeOrder('03');return false" onMouseover="showArrows('03')" onMouseout="hideArrows('03')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image3-2" src="images/3-2th.jpg"></a></div><div class="shadowback-UR"></div>
+						</div>
+						<div class="shadowback-lower">
+							<div class="shadowback-LL"></div><div class="shadowback-LR"></div>
+						</div>
+					</div>
+				</div>
+				<div class="tabLabel"><img src="images/tablabel-Wdesign.png" /></div>
+				<div class="doublearrow-UR"><img src="images/doublearrow-UR.png"></div>
+				<h3 class="portText">TEACHING K-8 MAGAZINE <br />Web Site</h3>
+					<p class="portText">Online version of <em>Teaching K-8</em> magazine, with multiple features and articles</p>
+					<h4 class="portText">ACHIEVEMENTS</h4>
+					<ul class="portText"><li>Designed entire site (navigation, layout, graphics)</li>
+		<li>Coded site using HTML, CSS, Javascript and Movable Type</li>
+		<li>Teamed with programmers to create the site back-end as well as search capability</li>
+		<li>Optimized content and META tags for search engines (SEO)</li>
+		<li>Assisted content manager with training in HTML and CSS skills</li></ul>
+					<!--<h4 class="portText">LINK TO LIVE SITE</h4>
+					<p class="portText"><a href="http://www.teachingk-8.com" target="_blank" class="bluelink">www.teachingk-8.com</a></p>-->
+				<div class="clr"></div>
+			</div>
+			
+			<!-- ================== -->
+			
+			<div id="port04">
+				<div class="portImages">
+					<div class="portImage01">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/4-1.jpg" onClick="changeOrder('04');return false" onMouseover="showArrows('04')" onMouseout="hideArrows('04')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image4-1" src="images/4-1th.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+						<div class="doublearrow-LL"><img src="images/doublearrow-LL.png"></div>
+					</div>
+					<div class="portImage02">
+						<div class="shadowback-upper">
+							<div class="shadowback-UL"><a href="images/4-2.jpg" onClick="changeOrder('04');return false" onMouseover="showArrows('04')" onMouseout="hideArrows('04')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image4-2" src="images/4-2th.jpg"></a></div><div class="shadowback-UR"></div>
+						</div>
+						<div class="shadowback-lower">
+							<div class="shadowback-LL"></div><div class="shadowback-LR"></div>
+						</div>
+					</div>
+					<div class="portImage03">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/4-3.jpg" onClick="changeOrder('04');return false" onMouseover="showArrows('04')" onMouseout="hideArrows('04')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image4-3" src="images/4-3th.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+						<div class="doublearrow-LL"><img src="images/doublearrow-LL.png"></div>
+					</div>
+				</div>
+				<div class="tabLabel"><img src="images/tablabel-Wdesign.png" /></div>
+				<div class="doublearrow-UR"><img src="images/doublearrow-UR.png"></div>
+				<h3 class="portText">HIGHLIGHTS PARENTS <br />Web Site</h3>
+					<p class="portText">Content site for family resources and articles from Highlights for Children.</p>
+					<h4 class="portText">ACHIEVEMENTS</h4>
+					<ul class="portText"><li>Designed entire site (navigation, layout, graphics)</li>
+		<li>Coded site using HTML, CSS, and Movable Type</li>
+		<li>Optimized content and META tags for search engines (SEO)</li></ul>
+					<h4 class="portText">LINK TO LIVE SITE</h4>
+					<p class="portText"><a href="http://www.highlightsparents.com" target="_blank" class="bluelink">www.highlightsparents.com</a></p>
+				<div class="clr"></div>
+			</div>	
+			
+			<!-- ================== -->
+			
+			<div id="port05">
+				<div class="portImages">
+					<div class="portImage01">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/5-1.jpg" onClick="changeOrder('05');return false" onMouseover="showArrows('05')" onMouseout="hideArrows('05')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image5-1" src="images/5-1th.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+						<div class="doublearrow-LL"><img src="images/doublearrow-LL.png"></div>
+					</div>
+					<div class="portImage02">
+						<div class="shadowback-upper">
+							<div class="shadowback-UL"><a href="images/5-2.jpg" onClick="changeOrder('05');return false" onMouseover="showArrows('05')" onMouseout="hideArrows('05')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image5-2" src="images/5-2th.jpg"></a></div><div class="shadowback-UR"></div>
+						</div>
+						<div class="shadowback-lower">
+							<div class="shadowback-LL"></div><div class="shadowback-LR"></div>
+						</div>
+					</div>
+					<div class="portImage03">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/5-3.jpg" onClick="changeOrder('05');return false" onMouseover="showArrows('05')" onMouseout="hideArrows('05')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image5-3" src="images/5-3th.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+						<div class="doublearrow-LL"><img src="images/doublearrow-LL.png"></div>
+					</div>
+				</div>
+				<div class="tabLabel"><img src="images/tablabel-Wdesign.png" /></div>
+				<div class="doublearrow-UR"><img src="images/doublearrow-UR.png"></div>
+				<h3 class="portText">I WAS A HIGHLIGHTS KID <br />Web Site</h3>
+					<p class="portText">Early social media 'blog' site to encourage the public to interact with the Highlights brand.</p>
+					<h4 class="portText">ACHIEVEMENTS</h4>
+					<ul class="portText"><li>Designed site (navigation, layout, graphics) to evoke nostaglia yet still look current</li>
+		<li>Coded site with XHTML, CSS, Javascript & Movable Type</li>
+		<li>Optimized content and META tags for search engines (SEO)</li></ul>
+					<h4 class="portText">LINK TO LIVE SITE</h4>
+					<p class="portText"><a href="http://www.iwasahighlightskid.com/" target="_blank" class="bluelink">www.iwasahighlightskid.com</a></p>
+				<div class="clr"></div>
+			</div>	
+			
+			
+			<!-- ================== -->
+			
+			<div id="port06">
+				<div class="portImages">
+					<div class="portImage01">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/6-1.jpg" onClick="changeOrder('06');return false" onMouseover="showArrows('06')" onMouseout="hideArrows('06')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image6-1" src="images/6-1th.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+						<div class="doublearrow-LL"><img src="images/doublearrow-LL.png"></div>
+					</div>
+				</div>
+				<div class="tabLabel"><img src="images/tablabel-Wdesign.png" /></div>
+				<div class="doublearrow-UR"><img src="images/doublearrow-UR.png"></div>
+				<h3 class="portText">OLIVER KLEBAN SHOES <br />Web Site</h3>
+					<p class="portText">Online brochure for brick and mortar children's boutique shoe store</p>
+					<h4 class="portText">ACHIEVEMENTS</h4>
+					<ul class="portText"><li>Designed entire site (navigation, layout, graphics)</li>
+		<li>Coded site using HTML and CSS</li>
+		<li>Provided custom illustration and photography</li></ul>
+					<!--<h4 class="portText">LINK TO LIVE SITE</h4>
+					<p class="portText"><a href="http://www.highlightsparents.com" target="_blank" class="bluelink">www.highlightsparents.com</a></p>-->
+				<div class="clr"></div>
+			</div>	
+			
+			<!-- ================== -->
+			
+			<div id="port07">
+				<div class="portImages">
+					<div class="portImage01">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/7-1.jpg" onClick="changeOrder('07');return false" onMouseover="showArrows('07')" onMouseout="hideArrows('07')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image7-1" src="images/7-1th.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+						<div class="doublearrow-LL"><img src="images/doublearrow-LL.png"></div>
+					</div>
+					<div class="portImage02">
+						<div class="shadowback-upper">
+							<div class="shadowback-UL"><a href="images/7-2.jpg" onClick="changeOrder('07');return false" onMouseover="showArrows('07')" onMouseout="hideArrows('07')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image7-2" src="images/7-2th.jpg"></a></div><div class="shadowback-UR"></div>
+						</div>
+						<div class="shadowback-lower">
+							<div class="shadowback-LL"></div><div class="shadowback-LR"></div>
+						</div>
+					</div>
+					<div class="portImage03">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/7-3.jpg" onClick="changeOrder('07');return false" onMouseover="showArrows('07')" onMouseout="hideArrows('07')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image7-3" src="images/7-3th.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+						<div class="doublearrow-LL"><img src="images/doublearrow-LL.png"></div>
+					</div>
+				</div>
+				<div class="tabLabel"><img src="images/tablabel-Wdesign.png" /></div>
+				<div class="doublearrow-UR"><img src="images/doublearrow-UR.png"></div>
+				<h3 class="portText">HIGHLIGHTS FOR CHILDREN <br />Promotional Emails</h3>
+					<p class="portText">Various graphic HTML emails over a 6 year period.</p>
+					<h4 class="portText">ACHIEVEMENTS</h4>
+					<ul class="portText"><li>Improved average click-through of holiday promotional email by 74% my first year (from single to double digit percentage)</li>
+		<li>Designed email and produced web-optimized graphics</li>
+		<li>Coded email with HTML and CSS to consistently appear the same in Yahoo, Gmail, Lotus Notes, et. al.</li>
+		<li>Tested layout and functionality on multiple email platforms and browsers</li>
+		<!--<li>Email #1 had the highest revenue and number of orders for all emails sent during that holiday season</li>--></ul>
+					<!--<h4 class="portText">LINK TO LIVE SITE</h4>
+					<p class="portText"><a href="http://www.highlightsparents.com" target="_blank" class="bluelink">www.highlightsparents.com</a></p>-->
+				<div class="clr"></div>
+			</div>	
+			
+			<!-- ================== -->
+			
+			<div id="port08">
+				<div class="portImages">
+					<div class="portImage01">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/8-1.jpg" onClick="changeOrder('08');return false" onMouseover="showArrows('08')" onMouseout="hideArrows('08')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image8-1" src="images/8-1th.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+						<div class="doublearrow-LL"><img src="images/doublearrow-LL.png"></div>
+					</div>
+				</div>
+				<div class="tabLabel"><img src="images/tablabel-Wdesign.png" /></div>
+				<div class="doublearrow-UR"><img src="images/doublearrow-UR.png"></div>
+				<h3 class="portText">HIGHLIGHTS FOR CHILDREN <br />Banner Ads</h3>
+					<p class="portText">Various internet banner ads over a 6 year period.</p>
+					<h4 class="portText">ACHIEVEMENTS</h4>
+					<ul class="portText"><li>Designed and produced static, animated GIF, and Flash banner ads for
+varied types of programs and promotions</li>
+		<li>Created branded ads that garned attention despite the increase of "banner blindness" on web pages</li></ul>
+					<!--<h4 class="portText">LINK TO LIVE SITE</h4>
+					<p class="portText"><a href="http://www.highlightsparents.com" target="_blank" class="bluelink">www.highlightsparents.com</a></p>-->
+				<div class="clr"></div>
+			</div>	
+			
+			<!-- ================== -->
+			
+			<div id="port09">
+				<div class="portImages">
+					<div class="portImage01">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/9-1.jpg" onClick="changeOrder('09');return false" onMouseover="showArrows('09')" onMouseout="hideArrows('09')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image9-1" src="images/9-1th.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+						<div class="doublearrow-LL"><img src="images/doublearrow-LL.png"></div>
+					</div>
+				</div>
+				<div class="tabLabel"><img src="images/tablabel-design.png" /></div>
+				<div class="doublearrow-UR"><img src="images/doublearrow-UR.png"></div>
+				<h3 class="portText">THE TIMOTHY FOUNDATION <br />Brochure</h3>
+					<p class="portText">6-panel, 2-color brochure</p>
+					<h4 class="portText">ACHIEVEMENTS</h4>
+					<ul class="portText"><li>Created a sophisticated yet clean design despite color limitations and no photography</li>
+		<li>Successfully balanced 2 colors to create eye-pleasing duotones</li></ul>
+					<!--<h4 class="portText">LINK TO LIVE SITE</h4>
+					<p class="portText"><a href="http://www.highlightsparents.com" target="_blank" class="bluelink">www.highlightsparents.com</a></p>-->
+				<div class="clr"></div>
+			</div>	
+			
+			<!-- ================== -->
+			
+			<div id="port10">
+				<div class="portImages">
+					<div class="portImage01">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/10-1.jpg" onClick="changeOrder('10');return false" onMouseover="showArrows('10')" onMouseout="hideArrows('10')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image10-1" src="images/10-1th.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+						<div class="doublearrow-LL"><img src="images/doublearrow-LL.png"></div>
+					</div>
+				</div>
+				<div class="tabLabel"><img src="images/tablabel-design.png" /></div>
+				<div class="doublearrow-UR"><img src="images/doublearrow-UR.png"></div>
+				<h3 class="portText">CARROLL MANUFACTURING <br />Magazine Ad</h3>
+					<p class="portText">4-color full page ad for a commercial kitchen equipment manufacturer.</p>
+					<h4 class="portText">ACHIEVEMENTS</h4>
+					<ul class="portText"><li>Created eye-catching ad concept from headline provided by client</li>
+		<li>Created custom photo/illustration</li></ul>
+					<!--<h4 class="portText">LINK TO LIVE SITE</h4>
+					<p class="portText"><a href="http://www.highlightsparents.com" target="_blank" class="bluelink">www.highlightsparents.com</a></p>-->
+				<div class="clr"></div>
+			</div>	
+			
+			<!-- ================== -->
+			<!--
+			<div id="port11">
+				<div class="portImages">
+					<div class="portImage01">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/11-1.jpg" onClick="changeOrder('11');return false" onMouseover="showArrows('11')" onMouseout="hideArrows('11')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image11-1" src="images/11-1th.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+						<div class="doublearrow-LL"><img src="images/doublearrow-LL.png"></div>
+					</div>
+					<div class="portImage02">
+						<div class="shadowback-upper">
+							<div class="shadowback-UL"><a href="images/11-2.jpg" onClick="changeOrder('11');return false" onMouseover="showArrows('11')" onMouseout="hideArrows('11')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image11-2" src="images/11-2th.jpg"></a></div><div class="shadowback-UR"></div>
+						</div>
+						<div class="shadowback-lower">
+							<div class="shadowback-LL"></div><div class="shadowback-LR"></div>
+						</div>
+					</div>
+					<div class="portImage03">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/11-3.jpg" onClick="changeOrder('11');return false" onMouseover="showArrows('11')" onMouseout="hideArrows('11')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image11-3" src="images/11-3th.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+						<div class="doublearrow-LL"><img src="images/doublearrow-LL.png"></div>
+					</div>
+				</div>
+				<div class="tabLabel"><img src="images/tablabel-ArtDirection.png" /></div>
+				<div class="doublearrow-UR"><img src="images/doublearrow-UR.png"></div>
+				<h3 class="portText">HIGHLIGHTS PARENTS <br />Web Site</h3>
+					<p class="portText">Content site for family resources and articles from Highlights for Children.</p>
+					<h4 class="portText">ACHIEVEMENTS</h4>
+					<ul class="portText"><li>Designed entire site (navigation, layout, graphics)</li>
+		<li>Coded site using HTML, CSS, and Movable Type</li>
+		<li>Optimized content and META tags for search engines (SEO)</li></ul>
+					<h4 class="portText">LINK TO LIVE SITE</h4>
+					<p class="portText"><a href="http://www.highlightsparents.com" target="_blank" class="bluelink">www.highlightsparents.com</a></p>
+				<div class="clr"></div>
+			</div>	
+			
+
+			
+			<div id="port12">
+				<div class="portImages">
+					<div class="portImage01">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/12-1.jpg" onClick="changeOrder('12');return false" onMouseover="showArrows('12')" onMouseout="hideArrows('12')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image12-1" src="images/12-1th.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+						<div class="doublearrow-LL"><img src="images/doublearrow-LL.png"></div>
+					</div>
+					<div class="portImage02">
+						<div class="shadowback-upper">
+							<div class="shadowback-UL"><a href="images/12-2.jpg" onClick="changeOrder('12');return false" onMouseover="showArrows('12')" onMouseout="hideArrows('12')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image12-2" src="images/12-2th.jpg"></a></div><div class="shadowback-UR"></div>
+						</div>
+						<div class="shadowback-lower">
+							<div class="shadowback-LL"></div><div class="shadowback-LR"></div>
+						</div>
+					</div>
+					<div class="portImage03">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/12-3.jpg" onClick="changeOrder('12');return false" onMouseover="showArrows('12')" onMouseout="hideArrows('12')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image12-3" src="images/12-3th.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+						<div class="doublearrow-LL"><img src="images/doublearrow-LL.png"></div>
+					</div>
+				</div>
+				<div class="tabLabel"><img src="images/tablabel-ArtDirection.png" /></div>
+				<div class="doublearrow-UR"><img src="images/doublearrow-UR.png"></div>
+				<h3 class="portText">HIGHLIGHTS PARENTS <br />Web Site</h3>
+					<p class="portText">Content site for family resources and articles from Highlights for Children.</p>
+					<h4 class="portText">ACHIEVEMENTS</h4>
+					<ul class="portText"><li>Designed entire site (navigation, layout, graphics)</li>
+		<li>Coded site using HTML, CSS, and Movable Type</li>
+		<li>Optimized content and META tags for search engines (SEO)</li></ul>
+					<h4 class="portText">LINK TO LIVE SITE</h4>
+					<p class="portText"><a href="http://www.highlightsparents.com" target="_blank" class="bluelink">www.highlightsparents.com</a></p>
+				<div class="clr"></div>
+			</div>	
+			
+
+			
+			<div id="port13">
+				<div class="portImages">
+					<div class="portImage01">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/13-1.jpg" onClick="changeOrder('13');return false" onMouseover="showArrows('13')" onMouseout="hideArrows('13')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image13-1" src="images/13-1th.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+						<div class="doublearrow-LL"><img src="images/doublearrow-LL.png"></div>
+					</div>
+					<div class="portImage02">
+						<div class="shadowback-upper">
+							<div class="shadowback-UL"><a href="images/13-2.jpg" onClick="changeOrder('13');return false" onMouseover="showArrows('13')" onMouseout="hideArrows('13')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image13-2" src="images/13-2th.jpg"></a></div><div class="shadowback-UR"></div>
+						</div>
+						<div class="shadowback-lower">
+							<div class="shadowback-LL"></div><div class="shadowback-LR"></div>
+						</div>
+					</div>
+					<div class="portImage03">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/13-3.jpg" onClick="changeOrder('13');return false" onMouseover="showArrows('13')" onMouseout="hideArrows('13')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image13-3" src="images/13-3th.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+						<div class="doublearrow-LL"><img src="images/doublearrow-LL.png"></div>
+					</div>
+				</div>
+				<div class="tabLabel"><img src="images/tablabel-ArtDirection.png" /></div>
+				<div class="doublearrow-UR"><img src="images/doublearrow-UR.png"></div>
+				<h3 class="portText">HIGHLIGHTS PARENTS <br />Web Site</h3>
+					<p class="portText">Content site for family resources and articles from Highlights for Children.</p>
+					<h4 class="portText">ACHIEVEMENTS</h4>
+					<ul class="portText"><li>Designed entire site (navigation, layout, graphics)</li>
+		<li>Coded site using HTML, CSS, and Movable Type</li>
+		<li>Optimized content and META tags for search engines (SEO)</li></ul>
+					<h4 class="portText">LINK TO LIVE SITE</h4>
+					<p class="portText"><a href="http://www.highlightsparents.com" target="_blank" class="bluelink">www.highlightsparents.com</a></p>
+				<div class="clr"></div>
+			</div>	
+			
+
+			
+			<div id="port14">
+				<div class="portImages">
+					<div class="portImage01">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/14-1.jpg" onClick="changeOrder('14');return false" onMouseover="showArrows('14')" onMouseout="hideArrows('14')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image14-1" src="images/14-1th.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+						<div class="doublearrow-LL"><img src="images/doublearrow-LL.png"></div>
+					</div>
+					<div class="portImage02">
+						<div class="shadowback-upper">
+							<div class="shadowback-UL"><a href="images/14-2.jpg" onClick="changeOrder('14');return false" onMouseover="showArrows('14')" onMouseout="hideArrows('14')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image14-2" src="images/14-2th.jpg"></a></div><div class="shadowback-UR"></div>
+						</div>
+						<div class="shadowback-lower">
+							<div class="shadowback-LL"></div><div class="shadowback-LR"></div>
+						</div>
+					</div>
+					<div class="portImage03">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/14-3.jpg" onClick="changeOrder('14');return false" onMouseover="showArrows('14')" onMouseout="hideArrows('14')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image14-3" src="images/14-3th.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+						<div class="doublearrow-LL"><img src="images/doublearrow-LL.png"></div>
+					</div>
+				</div>
+				<div class="tabLabel"><img src="images/tablabel-ArtDirection.png" /></div>
+				<div class="doublearrow-UR"><img src="images/doublearrow-UR.png"></div>
+				<h3 class="portText">HIGHLIGHTS PARENTS <br />Web Site</h3>
+					<p class="portText">Content site for family resources and articles from Highlights for Children.</p>
+					<h4 class="portText">ACHIEVEMENTS</h4>
+					<ul class="portText"><li>Designed entire site (navigation, layout, graphics)</li>
+		<li>Coded site using HTML, CSS, and Movable Type</li>
+		<li>Optimized content and META tags for search engines (SEO)</li></ul>
+					<h4 class="portText">LINK TO LIVE SITE</h4>
+					<p class="portText"><a href="http://www.highlightsparents.com" target="_blank" class="bluelink">www.highlightsparents.com</a></p>
+				<div class="clr"></div>
+			</div>	
+			
+
+			
+			<div id="port15">
+				<div class="portImages">
+					<div class="portImage01">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/15-1.jpg" onClick="changeOrder('15');return false" onMouseover="showArrows('15')" onMouseout="hideArrows('15')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image15-1" src="images/15-1th.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+						<div class="doublearrow-LL"><img src="images/doublearrow-LL.png"></div>
+					</div>
+					<div class="portImage02">
+						<div class="shadowback-upper">
+							<div class="shadowback-UL"><a href="images/15-2.jpg" onClick="changeOrder('15');return false" onMouseover="showArrows('15')" onMouseout="hideArrows('15')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image15-2" src="images/15-2th.jpg"></a></div><div class="shadowback-UR"></div>
+						</div>
+						<div class="shadowback-lower">
+							<div class="shadowback-LL"></div><div class="shadowback-LR"></div>
+						</div>
+					</div>
+					<div class="portImage03">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/15-3.jpg" onClick="changeOrder('15');return false" onMouseover="showArrows('15')" onMouseout="hideArrows('15')" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image15-3" src="images/15-3th.jpg"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+						<div class="doublearrow-LL"><img src="images/doublearrow-LL.png"></div>
+					</div>
+				</div>
+				<div class="tabLabel"><img src="images/tablabel-ArtDirection.png" /></div>
+				<div class="doublearrow-UR"><img src="images/doublearrow-UR.png"></div>
+				<h3 class="portText">HIGHLIGHTS PARENTS <br />Web Site</h3>
+					<p class="portText">Content site for family resources and articles from Highlights for Children.</p>
+					<h4 class="portText">ACHIEVEMENTS</h4>
+					<ul class="portText"><li>Designed entire site (navigation, layout, graphics)</li>
+		<li>Coded site using HTML, CSS, and Movable Type</li>
+		<li>Optimized content and META tags for search engines (SEO)</li></ul>
+					<h4 class="portText">LINK TO LIVE SITE</h4>
+					<p class="portText"><a href="http://www.highlightsparents.com" target="_blank" class="bluelink">www.highlightsparents.com</a></p>
+				<div class="clr"></div>
+			</div>	
+			-->
+			
+			
+			
+			
+			
+			
+		</div><!-- END CONTAINER DIV -->
+
+	</body>
+
+</html>
+
+

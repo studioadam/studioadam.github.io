@@ -1,0 +1,5 @@
+var s_account="hlghtsHighlightsProd"
+var s_linkInternalFilters = "javascript:,highlights.com,highlightshighfive.com,highlighthighfive.com,highlightsmagazinesite.com,highlightsjigsaw.com,highlights-jigsaw.com,highlightsforchildren.com,highlightsmagazine.com,highlightscatalog.com,puzzlebuzz.org,shophighlights.com,highlightsbooks.com,shophighlights.net,shophighlights.org"
+var s_trackingServer="nossl.highlights.com"
+var s_trackingServerSecure="ssl.highlights.com"
+var s_visitorNamespace="highlights"

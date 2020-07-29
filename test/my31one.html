@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<title>The 1140px Grid &middot; Fluid down to mobile</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	
+	<!-- 1140px Grid styles for IE -->
+	<!--[if lte IE 9]><link rel="stylesheet" href="css/ie.css" type="text/css" media="screen" /><![endif]-->
+
+	<!-- The 1140px Grid - http://cssgrid.net/ -->
+	<link rel="stylesheet" href="css/1140.css" type="text/css" media="screen" />
+	
+	<!-- Your styles -->
+	<link rel="stylesheet" href="css/styles.css" type="text/css" media="screen" />
+	
+	<!--css3-mediaqueries-js - http://code.google.com/p/css3-mediaqueries-js/ - Enables media queries in some unsupported browsers-->
+	<script type="text/javascript" src="js/css3-mediaqueries.js"></script>
+	
+	<!--Delete embedded styles, just for example.-->
+	<style type="text/css">
+	
+	body {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	}
+	
+	.container p {
+	
+	}
+	
+	</style>
+	
+	
+	<script>
+	function getSecondToLastRel2()
+     {
+          var parent = document.getElementById("stuff");
+          var childCount = parent.getElementsByTagName("li").length;
+          alert(childCount);
+     }
+	function getSecondToLastRel() {
+		var x=document.getElementById("stuff");
+		var y=x.getElementsByTagName("li").length;
+		alert(y);
+	}
+	getSecondToLastRel();
+	
+
+function focusHere()
+{
+my31.focus();
+}
+
+body.onload="window.focus()";
+
+	</script>
+
+</head>
+
+
+<body onload="javascript:focusHere()">
+
+<div class="container">
+	<div class="row">
+		<div class="eightcol">
+			<p>Studio Adam</p>
+		</div>
+		<div class="fourcol last">
+			<p>links and stuff here</p>
+		</div>
+	</div>
+</div>
+
+<div class="container">
+	<div class="row">
+		<div class="eightcol">
+			<h2>my31 one</h2>
+			<a href="TOGone.html">TOG one</a>
+			<a href="my31two.html">My31 two</a>
+			<p>I am a professional designer with years of experience creating design solutions for both web and print.</p>
+			<p>I believe in providing online customers positive user experiences. My goal is to deliver clients' brand messages with useful and rewarding user-centered design, resulting in customer loyalty over time.</span></p>
+		</div>
+		<div class="fourcol last">
+			<p>Portfolio</p>
+			
+			<ul id="stuff">
+				<li rel="fuzzy">cats</li>
+				<li rel="hairy">dogs</li>
+				<li rel="big">moose</li>
+				<li rel="feathers">chicken</li>
+				<li rel="gobblegobble">turkey</li>
+			</ul>
+
+		</div>
+	</div>
+</div>
+
+
+</body>
+
+</html>

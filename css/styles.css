@@ -1,0 +1,163 @@
+/* basic elements ---------- */
+
+body {
+	font: normal 14px/1.5em 'Arimo', sans-serif;
+    padding: 0 5% 2em 5%;
+}
+section {
+    max-width: 800px;
+    margin: .5em auto;
+	clear: both;
+}
+section:before {
+    content: '';
+    border-bottom: 1px solid #ddd;
+    display: block;
+    width: 40%;
+    width: 290px;
+    margin: 1.2em auto .7em auto;
+}
+section.summary:before {
+	border: none;
+}
+h1 {
+    text-align: center;
+    font: normal 3em 'Rancho', script;
+    margin: .5em auto;
+}
+h1:after {
+    content: '';
+    border-bottom: 1px solid #ddd;
+    display: block;
+    width: 40%;
+    width: 290px;
+    margin: .2em auto .7em auto;
+}
+h2 {
+    font: normal 2em/1em 'Rancho', sans-serif;
+    margin: .5em auto;
+}
+h3 {
+    font: normal 1.8em 'Rancho', sans-serif;
+    margin: .5em auto;
+}
+li {
+    margin-bottom: .3em;
+}
+
+
+/* section-specific ---------- */
+
+.skills em {
+	color: #666;
+}
+.assignment h4 {
+	color: #666666;
+    margin: 0;
+	font: normal 1.6em/1em 'Rancho', sans-serif;
+    display: inline-block;
+}
+.dates {
+    display: inline-block;
+    font-style: italic;
+    float: right;
+    color: #666;
+	margin: .2em 0 0 .2em;
+}
+.assignment h5 {
+	margin: .5em 0 0 0;
+	font-size: 1.1em;
+	line-height: 1.2em;
+}
+.assignment {
+	overflow: auto;
+	clear: both;
+	display: block;
+	margin: 0 0 1.4em 0;
+}
+.assignment .copy {
+	float: left;
+	width: 75%;
+	padding-right: 4%;
+}
+.assignment .images {
+	float: right;
+	width: 20%;
+}
+.assignment .images img {
+	width: 100%;
+}
+.education p {
+	margin: .5em 0 0;
+}
+.education p+p {
+	margin: 0;
+}
+
+
+/* fancybox overrides ---------- */
+
+.fancybox-custom .fancybox-skin {
+	box-shadow: 0 0 50px #222;
+}
+.fancybox-bt {
+    display: block;
+    margin-bottom: 1em;
+    /* box-shadow: 7px 7px 10px #aaa; */
+    position: relative;
+    opacity: .75;
+	padding: 7px 0 0 5px;
+}
+.fancybox-bt .fa {
+    position: absolute;
+}
+.fancybox-bt .fa-stack {
+    color: #000;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.fancybox-bt .fa-stack .fa-circle {
+    color: #999;
+}
+.fancybox-bt:hover {
+    opacity: 1;
+}
+.fancybox-nav {
+    width: 16% !important;
+}
+.fancybox-inner div {
+    padding: 10px;
+}
+.fancybox-inner div > * {
+    margin: 0 0 .8em 0;
+}
+.fancybox-inner h5 {
+    margin: 0;
+	font: normal 1.6em/1em 'Rancho', sans-serif;
+}
+.fancybox-inner h4 {
+    margin: .5em 0;
+	font: normal 1em/1em 'Rancho', sans-serif;
+}
+.fancybox-title {
+	line-height: 1.2em !important;
+}
+.fancybox-title em {
+	display: inline-block;
+	margin-top: .5em;
+}
+
+
+/* media queries ---------- */
+
+@media (max-width: 480px) {
+	.dates {
+		float: none;
+		display: block;
+		margin-left: 0;
+	}
+	ul {
+		padding-left: 1em;
+	}
+}

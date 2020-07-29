@@ -1,0 +1,653 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html><head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<title>Highlights for Children - Magazines, Puzzle Book Clubs, Games, Gifts and Toys</title>
+
+<!-- Display meta tags: begin --> 
+<meta NAME="title" CONTENT="Highlights Home Page" />
+<meta NAME="copyright" CONTENT="Highlights for Children" />
+<meta NAME="description" CONTENT="Online Games for KidsHighlightsKids.com PuzzlemaniaKids.comCheck out our other sitesHighlights for Teachers Highlights for ParentsFeatured Fun High FiveFind Out More about High FiveMore Magazines Turtle GirlFind o" />
+<meta NAME="keywords" CONTENT="highlights, children, magazine" />
+
+ <!-- Display meta tags: end -->
+	
+<link type="text/css" rel="stylesheet" media="all" href="homepagetestLOCAL_files/css_019cb3150f4aee814cf5951b9fdbaace.css" />
+
+
+<script type="text/javascript" src="homepagetestLOCAL_files/js_d1cb8c22e2fcc4e38f45cce41090e152.js"></script>
+<script type="text/javascript" src="homepagetestLOCAL_files/browser_detection.js"></script>
+
+
+
+<script type="text/javascript">
+<!--//--><![CDATA[//><!--
+jQuery.extend(Drupal.settings, { "basePath": "/", "admin_menu": { "margin_top": 1 } });
+//--><!]]>
+</script>
+
+<script type="text/javascript">
+<!-- hide from non JavaScript Browsers
+//Original Ticker By Dynamic Drive (http://www.dynamicdrive.com) -- Edits by AC & SH 
+var ie4=document.all
+var curindex=0
+var totalcontent=0
+var running = true;
+var timingvar;
+var rotation_timer=5000;
+var the_images = new Array('img-hfcsite-main/feature-iphone-background.jpg','img-hfcsite-main/feature-iphone-spacer.gif','img-hfcsite-main/feature-iphone-new.gif','img-hfcsite-main/feature-iphone-head.gif','img-hfcsite-main/feature-iphone-learnmorebt.gif','img-hfcsite-main/feature-iphone-buybt.gif','img-hfcsite-main/feature-PZ-new.jpg','img-hfcsite-main/feature-hphotlink-back.jpg','img-hfcsite-main/feature-hphotlink-spacer.gif','img-hfcsite-main/feature-01-bt-off.png','img-hfcsite-main/feature-01-bt-on.png','img-hfcsite-main/feature-02-bt-off.png','img-hfcsite-main/feature-02-bt-on.png','img-hfcsite-main/feature-03-bt-off.png','img-hfcsite-main/feature-03-bt-on.png','img-hfcsite-main/feature-04-bt-off.png','img-hfcsite-main/feature-04-bt-on.png','img-hfcsite-main/feature-05-bt-off.png','img-hfcsite-main/feature-05-bt-on.png');
+
+
+function get_total(){
+if (ie4){
+while (eval("document.all.content"+totalcontent))
+totalcontent++
+}
+else{
+while (document.getElementById("content"+totalcontent))
+totalcontent++
+}
+}
+
+function contract_all(){
+for (y=0;y<totalcontent;y++){
+	document.getElementById("content"+y).style.display="none"
+	yPlusOne = y+1;
+	document.getElementById("featurelink" + yPlusOne + "image").src = "img-hfcsite-main/feature-0" + yPlusOne + "-bt-off.png";
+	}
+}
+
+function expand_one(which){
+contract_all()
+whichPlusOne = which+1;
+document.getElementById("featurelink" + whichPlusOne + "image").src = "img-hfcsite-main/feature-0" + whichPlusOne + "-bt-on.png";
+document.getElementById("content"+which).style.display="block";
+}
+
+function content_advance() {
+	if (running) {
+		curindex=(curindex<totalcontent-1)? curindex+1: 0
+		display_content()
+	}
+}
+
+function display_content() {
+	if (running) {
+		get_total();
+		contract_all();
+		expand_one(curindex);
+		timingvar = setTimeout("content_advance()", rotation_timer);
+	}
+	else {
+		running=true;
+		display_content();
+		// the following line was used to toggle the play/stop button 
+		//document.getElementById("div1").innerHTML='<a href="#" name="link4" onclick="stop_content()"><img src="//media.highlights.com/img-parents-slideshownav/Stop.gif" name="Image2" alt="Stop Slideshow"></a>'
+	}
+}
+
+function stop_content() {
+	if (running) {
+	running=false
+	// the following line was used to toggle the play/stop button 
+	// document.getElementById("div1").innerHTML='<a href="#" name="link3" onclick="display_content()"><img src="http://media.highlights.com/img-parents-slideshownav/Play.gif" name="Image1" alt="Play Slideshow"></a>'
+	}
+}
+
+function display_next() {
+	stop_content()
+	get_total()
+	contract_all()
+	next_calc()
+	expand_one(curindex)
+}
+
+function display_previous() {
+	stop_content()
+	get_total()
+	contract_all()
+	previous_calc()
+	expand_one(curindex)
+}
+
+function display_this(theOneToDisplay) {
+				//alert("running display_this; theOneToDisplay is: " + theOneToDisplay);
+	stop_content();
+	clearTimeout(timingvar);
+	contract_all();
+				//alert("running display_this; curindex is: " + curindex);
+				//alert("running display_this; totalcontent is: " + totalcontent);
+	if (curindex >= 0 || curindex < totalcontent) {
+		//alert("curindex is now: " + curindex);
+		curindex = theOneToDisplay;
+	} else {
+	//alert("it didn't work right");
+	curindex = 0;
+	}
+	expand_one(curindex);
+	timingvar = setTimeout("display_content()", rotation_timer); // After a set period, start up again with display_content
+}
+
+function next_calc(){
+	curindex=curindex+1
+	if (curindex==3) {
+	curindex=0
+	}
+}
+
+function previous_calc() {
+	curindex=curindex-1
+	if (curindex==-1) {
+	curindex=2
+	}
+}
+
+
+function doImagePreload() {
+   preloadImages(the_images);
+}
+
+
+function preloadImages(the_images_array)
+{
+   for(var loop = 0; loop < the_images_array.length; loop++)
+   {
+	var an_image = "an_image"+loop;
+	var an_image = new Image();
+	an_image.src = the_images_array[loop];
+	//alert("loading: " + an_image.src);
+   }
+   //alert("array is: " + the_images);
+}
+
+function initFeatureRotation() {
+	doImagePreload();
+	display_content();
+}
+
+window.onload=initFeatureRotation
+		// End Hiding -->
+	</script>
+
+
+<!-- Display tracking code - include files only: begin -->
+<script language="JavaScript" src="homepagetestLOCAL_files/s_settings.js"></script>
+<script language="JavaScript" src="homepagetestLOCAL_files/s_code.js"></script>
+<!-- Display tracking code - include files only: end -->
+<!-- BLOCK: Hide breadcrumbs span -->
+<style type="text/css">
+span.breadcrumb {display:none;}
+#mainfeatureblock {
+	width:470px;
+	height: 270px;
+	margin:0 0 40px 10px;
+	overflow:hidden;
+	background-image:url("img-hfcsite-main/featuread-back.jpg");
+	background-repeat:no-repeat;
+	background-position:left top;
+	}
+#content0, #content1, #content2, #content3, #content4 {
+width:444px;
+height:217px;
+margin: 14px auto auto 13px;
+}
+#switch_controls {
+margin:6px 16px 0px 0px;
+float:right;
+}
+#switch_controls div {
+display:inline;
+}
+.bluehomebox {
+width:182px;
+padding-left:14px;
+font-family: Arial, Helvetica, sans-serif;
+}
+.bluehomebox p {
+margin:6px auto 0px auto;
+padding-bottom:20px; }
+</style>
+
+</head><body topmargin="0" leftmargin="0" marginheight="0" marginwidth="0">
+
+<!-- ClickTale Top part -->
+<script type="text/javascript">
+var WRInitTime=(new Date()).getTime();
+</script>
+<!-- ClickTale end of Top part -->
+
+<div id="block-block-35" class="clear-block block block-block">
+
+
+  <div class="content"><!-- BLOCK: Set siteId, ccid, etc. in session -->
+</div>
+</div>
+<div id="block-block-3" class="clear-block block block-block">
+
+
+  <div class="content"><!-- BLOCK: top nav outer -->
+<a name="topofpage"></a>
+<div id="topnavouter"><!-- begin topnavouter div -->
+<div id="topnav"><!-- begin topnav div -->
+<div id="topnavlogo"><a href="http://www.highlights.com/"><img title="Highlights.com Home" src="homepagetestLOCAL_files/hfclogo_01.gif" alt="" width="234" border="0" height="29"></a></div>
+<div id="searcharea"><!-- begin searcharea div -->
+<div id="searchbox">
+<form name="searchForm" action="http://search.highlights.com">
+		 <input name="q" size="15" maxlength="35" value="" onfocus="this.select();" type="text">
+</form></div>
+		 <div id="searchbutton"><input name="Search" src="homepagetestLOCAL_files/search_bt.gif" alt="Search" title="Search" type="image" border="0"></div>
+
+</div>
+<!-- end searcharea div -->
+<div id="topnavlinks"><!-- begin topnavlinks div --> 			<a class="hoverunderline" href="http://www.highlightsparents.com/">PARENTING TIPS</a><a class="hoverunderline" href="http://www.highlightsteachers.com/">TEACHER RESOURCES</a><a class="hoverunderline" href="http://www.highlightskids.com/">HIGHLIGHTS KIDS</a></div>
+<!-- end topnavlinks div -->
+<div class="clr">&nbsp;</div>
+</div>
+<!-- end topnav div --></div>
+<!-- end topnavouter div --></div>
+</div>
+<div id="block-block-4" class="clear-block block block-block">
+
+
+  <div class="content"><!-- BLOCK: top nav bar inner 1 -->
+<div id="topnavmainouter"><!-- begin topnavmainouter div -->
+	<div id="topnavmain"><!-- begin topnavmain div -->
+		<div id="bar1logo"><a href="http://www.highlights.com/"><img src="homepagetestLOCAL_files/hfclogo_bottom.png" alt="Highlights logo" title="Highlights.com Home" width="230" border="0" height="83"></a></div>
+		<div id="bar1sliver" style="float: left;"><img src="homepagetestLOCAL_files/navbarsleftedge_2.jpg" name="navBar1Sliver" width="10" border="0" height="65"></div>
+		
+		
+		<!-- begin nav bars -->
+		<div id="navbars">
+			<!-- begin primary nav bar -->
+			<div id="bar1"><div id="bar1agedrop"><form action="null">
+
+<script type="text/javascript">
+
+function shopByAgeDropdown(passedform)
+{
+    var urlbase = "http://search.highlights.com" ;
+    selecteditem = passedform.searchByAge.selectedIndex ;
+    searchByAge = passedform.searchByAge.options[ selecteditem ].value ;
+	fullUrlString = urlbase + searchByAge;
+	
+    if (searchByAge.length != 0) {
+		
+	  location.href = urlbase + searchByAge ;
+	  nopassedform.reset();
+    }
+}
+</script>
+						<select name="searchByAge" onchange="shopByAgeDropdown(this.form)">
+						<option value="" selected="selected">Select</option>
+
+						<option value="?age=3&amp;i=1&amp;u1=age">Age 3</option>
+						<option value="?age=4&amp;i=1&amp;u1=age">Age 4</option>
+						<option value="?age=5&amp;i=1&amp;u1=age">Age 5</option>
+						<option value="?age=6&amp;i=1&amp;u1=age">Age 6</option>
+						<option value="?age=7&amp;i=1&amp;u1=age">Age 7</option>
+						<option value="?age=8&amp;i=1&amp;u1=age">Age 8</option>
+
+						<option value="?age=9&amp;i=1&amp;u1=age">Age 9</option>
+						<option value="?age=10&amp;i=1&amp;u1=age">Age 10</option>
+						<option value="?age=11&amp;i=1&amp;u1=age">Age 11</option>
+						<option value="?age=12&amp;i=1&amp;u1=age">Age 12</option>
+						</select></form></div><div id="bar1age">See All By Age</div>
+			<div id="mainnavlinks"><ul id="topnav_mainMenu"><li style="background: transparent none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" id="mags_mainMenu" onmouseover="javascript:display_magsSubmenu()"><a style="color: white;" href="http://www.highlights.com/highlights-magazines-for-kids" class="hoverunderline">Highlights Magazines</a></li><li style="background: transparent none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" id="clubs_mainMenu" onmouseover="javascript:display_clubsSubmenu()"><a style="color: white;" href="http://www.highlights.com/pass-site-id?url=http://shop.highlights.com/webapp/wcs/stores/servlet/CategoryDisplay?storeId=16151&amp;catalogId=17603&amp;categoryId=241891" class="hoverunderline">Highlights Clubs</a></li><li style="background: rgb(175, 219, 122) none repeat scroll 0% 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" id="merch_mainMenu" onmouseover="javascript:display_merchSubmenu()"><a style="color: black;" href="http://www.highlights.com/pass-site-id?url=http://shop.highlights.com/webapp/wcs/stores/servlet/CategoryDisplay?storeId=16151&amp;catalogId=17603&amp;categoryId=241892" class="hoverunderline">Highlights Merchandise</a></li></ul></div>
+			<div class="clr"></div>
+			</div><!-- end primary nav bar -->
+			
+			<!-- begin secondary nav bar area -->
+			<div id="bar2"><div style="background-image: url(img-hfcsite-main/subnavback.jpg);" id="bar2links">
+				<ul style="display: none;" id="mags_subMenu"><!-- Mags -->
+					<li><a href="http://www.highlights.com/highlights-magazine-for-kids?productId=hfcmag" class="hoverunderline">Highlights</a></li>
+					<li><a href="http://www.highlights.com/high-five-magazine-for-kids?productId=hhfmag" class="hoverunderline">Highlights High Five</a></li>
+				</ul>
+
+				<ul style="display: none;" id="clubs_subMenu"><!-- Clubs -->
+					<li><a href="http://www.highlights.com/pass-site-id?url=http://shop.highlights.com/webapp/wcs/stores/servlet/ProductDisplay?storeId=16151&amp;catalogId=17603&amp;categoryId=241891&amp;productId=686723" class="hoverunderline">Hidden Pictures Playground</a></li>
+					<li><a href="http://www.highlights.com/pass-site-id?url=http://shop.highlights.com/webapp/wcs/stores/servlet/ProductDisplay?storeId=16151&amp;catalogId=17603&amp;categoryId=241891&amp;productId=690724" class="hoverunderline">Which Way USA</a></li>
+					<li><a href="http://www.highlights.com/pass-site-id?url=http://shop.highlights.com/webapp/wcs/stores/servlet/ProductDisplay?storeId=16151&amp;catalogId=17603&amp;categoryId=241891&amp;productId=690725" class="hoverunderline">Top Secret Adventures</a></li>
+					<li><a href="http://www.highlights.com/pass-site-id?url=http://shop.highlights.com/webapp/wcs/stores/servlet/ProductDisplay?storeId=16151&amp;catalogId=17603&amp;categoryId=241891&amp;productId=692723" class="hoverunderline">Mathmania</a></li>
+					<li><a href="http://www.highlights.com/pass-site-id?url=http://shop.highlights.com/webapp/wcs/stores/servlet/ProductDisplay?storeId=16151&amp;catalogId=17603&amp;categoryId=241891&amp;productId=692724" class="hoverunderline">Puzzlemania</a></li>
+					<li><a href="http://www.highlights.com/pass-site-id?url=http://shop.highlights.com/webapp/wcs/stores/servlet/ProductDisplay?storeId=16151&amp;catalogId=17603&amp;categoryId=241891&amp;productId=692725" class="hoverunderline">Puzzle Buzz</a></li>
+				</ul>
+
+
+				<ul style="display: inline;" id="merch_subMenu"><!-- Merch -->
+					<li><a href="http://www.highlights.com/pass-site-id?url=http://shop.highlights.com/webapp/wcs/stores/servlet/CategoryDisplay?storeId=16151&amp;catalogId=17603&amp;categoryId=241893" class="hoverunderline">Reading</a></li>
+					<li><a href="http://www.highlights.com/pass-site-id?url=http://shop.highlights.com/webapp/wcs/stores/servlet/CategoryDisplay?storeId=16151&amp;catalogId=17603&amp;categoryId=241894" class="hoverunderline">Pretend Play</a></li>
+					<li><a href="http://www.highlights.com/pass-site-id?url=http://shop.highlights.com/webapp/wcs/stores/servlet/CategoryDisplay?storeId=16151&amp;catalogId=17603&amp;categoryId=241895" class="hoverunderline">Arts and Crafts</a></li>
+					<li><a href="http://www.highlights.com/pass-site-id?url=http://shop.highlights.com/webapp/wcs/stores/servlet/CategoryDisplay?storeId=16151&amp;catalogId=17603&amp;categoryId=241896" class="hoverunderline">Electronic Learning</a></li>
+					<li><a href="http://www.highlights.com/pass-site-id?url=http://shop.highlights.com/webapp/wcs/stores/servlet/CategoryDisplay?storeId=16151&amp;catalogId=17603&amp;categoryId=241897" class="hoverunderline">Puzzles and Games</a></li>
+					<li><a href="http://www.highlights.com/pass-site-id?url=http://shop.highlights.com/webapp/wcs/stores/servlet/CategoryDisplay?storeId=16151&amp;catalogId=17603&amp;categoryId=241898" class="hoverunderline">Science Fun</a></li>
+				</ul>
+				
+				</div>
+			</div><!-- end secondary nav bar area  -->
+			
+		</div><!-- end nav bars  -->
+		
+		<div class="clr"></div>
+	</div><!-- end topnavmainouter div -->
+</div><!-- end topnavmain div --></div>
+</div>
+
+<div id="mainouter"><!-- begin mainouter div -->
+	<div id="main"><!-- begin main div -->
+<!-- begin 3 column area -->
+<div id="mainleftcol"><!-- begin mainleftcol div -->
+		<div id="block-block-61" class="clear-block block block-block">
+
+
+  <div class="content"><!-- BLOCK: home test left side -->
+  
+<div class="leftcol" style="padding-top: 10px;"><img src="img-hfcsite-main/kids-play-here.jpg" width="187" height="93" alt="Kids play here!" title="Highlights Kids web sites have free online fun for children!"><br /><a href="http://www.puzzlemaniakids.com/" target="_blank"><img src="img-hfcsite-main/puzzlemania-kids.jpg" width="187" height="183" alt="Puzzlemania Kids has free online puzzles and games for children!" title="PuzzlemaniaKids.com is full of interactive puzzles, games, Hidden Pictures, and more for children with NO ADVERTISING"></a><br /><a href="http://www.highlightskids.com/" target="_blank"><img src="img-hfcsite-main/highlights-kids.jpg" width="187" height="193" alt="Highlights Kids has free online games and stories for children!" title="HighlightsKids.com is full of interactive games, Hidden Pictures, stories, and more for children with NO ADVERTISING"></a></div>
+<!--<div class="leftcol" style="padding-top: 10px;"><a href="http://www.highlightskids.com/" target="_blank" title="HighlightsKids.com is full of interactive games, Hidden Pictures, stories, and more for children with NO ADVERTISING"><img src="homepagetestLOCAL_files/kids-home-ad.gif" alt="Highlights Kids website has free online fun for children"></a></div>
+<div class="leftcol" style="padding-top: 10px;"><a href="http://www.highlights.com/hidden-pictures-iphone-game" title="Play Hidden Pictures on your iPhone and iPod touch!"><img src="homepagetestLOCAL_files/sidead-iphone-app.jpg" alt="Play Hidden Pictures on your iPhone and iPod touch!" usemap="#iphonemap"></a></div>-->
+<div style="width:170px; margin:30px 0px 10px 50px; text-align: center;"><a href="http://www.highlights.com/newsroom-home" title="Highlights State of the Kid"><img src="homepagetestLOCAL_files/stateofkid_highlights.jpg" width="170" height="66" alt="Highlights State of the Kid"></a><p style="font-size: 115%;">What kids told us...<br><a href="http://www.highlights.com/newsroom-home" title="Highlights State of the Kid">Read the report here.</a></p></div>
+</div>
+</div>
+</div><!-- end mainleftcol div -->
+		
+<div id="mainmiddlecol"><!-- begin mainmiddlecol div -->
+				<span class="breadcrumb"><a href="http://www.highlights.com/">Home</a></span>		
+<div id="node-274" class="node">
+
+
+
+      <!--<span class="submitted"></span>-->
+  
+  <div class="content clear-block">
+  
+
+  
+<div id="mainfeatureblock"><!-- BEGIN DIV MAINFEATUREBLOCK -->
+
+
+<!--ADD YOUR TICKER CONTENT BELOW, by wrapping each one inside a <DIV> as shown below.-->
+<!--For each DIV, increment its ID attribute for each additional content (ie: "content1", "content2" etc)-->
+
+<div id="content0" style="display:block;">
+	<!-- ADD TICKER's CONTENT #1 HERE -->
+	<div class="feature_inner_container" style="background-image: url('img-hfcsite-main/feature-iphone-background.jpg'); background-repeat: no-repeat; background-position: left top; width:444px; height:217px; font-family: Arial, helvetica, sans-serif; font-size: 12px; line-height: 16px; font-weight:bold;">
+		<div style="float:right;"><a href="http://www.highlights.com/hidden-pictures-iphone-game"><img src="img-hfcsite-main/feature-iphone-spacer.gif" width="130px" height="216px" /></a></div>
+		<div><img src="img-hfcsite-main/feature-iphone-new.gif" width="91px" height="44px" alt="NEW" /></div>
+		<div><img src="img-hfcsite-main/feature-iphone-head.gif" width="313px" height="49px" alt="Play Hidden Pictures on your iPhone and iPod Touch!" /></div>
+		<div style="height:80px;"><p style="width:290px; margin:4px auto 0px 17px;">Now you can enjoy <em>Hidden Pictures</em> puzzles&nbsp;ANYWHERE!</p><ul style="width:290px; margin: 0px; padding-left: 30px;"><li style="margin: 0px; padding: 0.2em 0 0 0;">Interactive touch and find</li><li style="margin: 0px; padding: 0.2em 0 0 0;">Use clues and hints to find <em>Hidden Pictures</em></li></ul></div>
+		<div style="float:left;"><a href="http://www.highlights.com/hidden-pictures-iphone-game"><img src="img-hfcsite-main/feature-iphone-learnmorebt.gif" width="157px" height="31px" alt="Learn more..." title="Learn more about the Hidden Pictures iPhone and iPod game" /></a></div>
+		<div><a href="http://click.linksynergy.com/fs-bin/stat?id=8zxLWCpsE3c&offerid=146261&type=3&subid=0&tmpid=1826&RD_PARM1=http%253A%252F%252Fitunes.apple.com%252FWebObjects%252FMZStore.woa%252Fwa%252FviewSoftware%253Fid%253D333263975%2526mt%253D8%2526uo%253D6%2526partnerId%253D30" target="_blank"><img src="img-hfcsite-main/feature-iphone-buybt.gif" width="156px" height="31px" alt="Buy the game now" title="Buy the game from the iTunes store now" /></a></div>
+	</div>
+	<!-- END CONTENT #1 -->
+</div>
+
+<div id="content1" style="display:none">
+	<!-- ADD TICKER's CONTENT #2 HERE -->
+	<div class="feature_inner_container"><a href="http://www.highlights.com/puzzlemania-home"><img src="img-hfcsite-main/feature-PZ-new.jpg" width="444px" height="217px" alt="Introducing the NEW Puzzlemania club from Highlights... Find out more" title="See the all new Puzzlemania puzzle book club from Highlights" /></a></div>
+	<!-- END CONTENT #2 -->
+</div>
+
+<div id="content2" style="display:none">
+	<!-- ADD TICKER's CONTENT #3 HERE -->
+	<div class="feature_inner_container" style="background-image: url('img-hfcsite-main/feature-hphotlink-back.jpg'); background-repeat: no-repeat; background-position: left bottom; width:444px; height:217px; font-family: Arial, helvetica, sans-serif; font-size: 12px; line-height: 16px; font-weight:bold; border:0px dotted; text-align:center;">
+		<div style="padding-top:114px;"><p style="margin:0px auto 0px auto; width:290px; text-align:center;">Receive a FREE downloadable Hidden Pictures&reg puzzle in your e-mail each month!</p></div>
+		<div style="width:444px; margin:10px auto 0px auto;"><a href="http://www.highlights.com/newsletter-preferences-subscribe"><img src="img-hfcsite-main/feature-hphotlink-spacer.gif" width="440px" height="54px" alt="Sign up for free Hidden Pictures in your email inbox every month" title="Sign up for free Hidden Pictures in your email inbox every month" /></a></div>
+	</div>
+	<!-- END CONTENT #3 -->
+</div>
+<!--End Ticker Code-->
+<!--CODE FOR SLIDESHOW NAV BUTTONS-->
+<div id="switch_controls">
+	<div>
+		<a href="#" name="link1" onclick="display_this(0)"><img src="img-hfcsite-main/feature-01-bt-off.png" id="featurelink1image"></a>
+	</div>
+	<div>
+		<a href="#" name="link2" onclick="display_this(1)"><img src="img-hfcsite-main/feature-02-bt-off.png" id="featurelink2image"></a>
+	</div>
+	<div>
+		<a href="#" name="link3" onclick="display_this(2)"><img src="img-hfcsite-main/feature-03-bt-off.png" id="featurelink3image"></a>
+	</div>
+</div>
+
+
+
+</div><!-- END DIV MAINFEATUREBLOCK -->
+
+
+
+
+
+<div style="width:478px; height:383px; background-image:url('img-hfcsite-main/magazines-background.jpg'); background-repeat:no-repeat; background-position:left top; font-size:10px; line-height:14px; margin-bottom:20px;">
+<div style="float:left;"><a href="http://www.highlights.com/high-five-magazine-for-kids?productId=hhfmag"><img src="img-hfcsite-main/feature-hphotlink-spacer.gif" width="186px" height="160px" alt="High Five Magazine" title="High Five Magazine is the perfect children's magazine for kids ages 2 through 6!" /></a><br /><a href="http://www.highlights.com/highlights-magazine-for-kids?productId=hfcmag"><img src="img-hfcsite-main/feature-hphotlink-spacer.gif" width="186px" height="180px" alt="Highlights Magazine" title="Highlights Magazine is the world's favorite kids magazine!" /></a></div>
+
+<p style="padding: 92px 22px 0 198px; margin:0;">Packed with read-along stories, do-together activites, charming illustrations, My First Hidden Pictures&reg;, Say It in Spanish! and more, <em><strong>High Five</strong></em> makes a great gift that gives back all year long.</p>
+<div style="font-size:11px; line-height:14px; font-weight:bold; padding:10px 25px 0 201px;"><p style="float:left; margin:0 11px 0 0;"><a href="http://www.highlights.com/high-five-magazine-for-kids?productId=hhfmag" class="hoverunderline">Subscribe</a></p>
+<p style="float:left; margin:0 11px 0 0;"><a href="http://www.highlights.com/pass-site-id?url=https://w1.buysub.com/pubs/HI/HHF/Gift_Renewal_Login_Redirect.jsp?cds_mag_code=HHF&cds_page_id=77935" class="hoverunderline">Renew</a></p>
+<p style="margin:0 0px 0 0;"><a href="http://www.highlights.com/customer-service-high-five-magazine" class="hoverunderline">Customer Service</a></p></div>
+<p style="padding: 50px 25px 0 180px; margin:0;">The experts at <em><strong>Highlights</strong></em> know how to keep kids reading, thinking and learning with a wide variety of fresh new stories, puzzles, crafts, games and activities each month.</p>
+<div style="font-size:11px; line-height:14px; font-weight:bold; padding:10px 25px 0 194px;"><p style="float:left; margin:0 11px 0 0;"><a href="http://www.highlights.com/highlights-magazine-for-kids?productId=hfcmag" class="hoverunderline">Subscribe</a></p>
+<p style="float:left; margin:0 11px 0 0;"><a href="http://www.highlights.com/pass-site-id?url=https://w1.buysub.com/pubs/HI/HFK/Gift_Renewal_Login_Redirect.jsp?cds_mag_code=HFK&cds_page_id=77934" class="hoverunderline">Renew</a></p>
+<p style="margin:0 0px 0 0;"><a href="http://www.highlights.com/customer-service-highlights-magazine" class="hoverunderline">Customer Service</a></p></div>
+</div>
+
+
+
+
+
+
+
+
+
+
+<div id="category_name" class="store_page_header">Customer Favorites</div>
+
+<div id="category_featured_items" class="allStore_featured_items">
+<!-- Start - JSP File name:  MultipleProductsDisplay.jsp -->
+	<table id="table_multiple_products" border="0" cellpadding="0" cellspacing="0">
+			<tbody><tr class="tr_multiple_products_row">
+					<td class="td_multiple_products_row_column" valign="top">
+<!-- Start - JSP File name:  SingleProductDisplay.jsp -->
+						<div class="Div_single_product">
+								<div class="product_image" id="single_product_image_684236">
+			<a class="a_single_product_image" id="a_single_product_image_684236" href="http://shop.highlights.com/webapp/wcs/stores/servlet/ProductDisplay?storeId=16151&amp;productId=685238&amp;catalogId=17603&amp;categoryId=241896"><img class="single_product_image" id="single_product_image_684236" src="homepagetestLOCAL_files/007083.jpg"></a>
+		</div>
+	
+	
+		<div class="product_name" id="single_product_name_684236">
+			<a class="a_single_product_image" href="http://shop.highlights.com/webapp/wcs/stores/servlet/ProductDisplay?storeId=16151&amp;productId=685238&amp;catalogId=17603&amp;categoryId=241896">Amazing Money Jar</a>
+		</div>
+				<div class="product_price" id="single_product_price_684236">$14.98</div>
+
+
+						</div>
+<!-- End - JSP File name:  SingleProductDisplay.jsp --> 
+					</td>
+				
+					<td class="td_multiple_products_row_column" valign="top">
+<!-- Start - JSP File name:  SingleProductDisplay.jsp -->
+
+<div class="Div_single_product">
+	
+		<div class="product_image" id="single_product_image_684735">
+			<a class="a_single_product_image" id="a_single_product_image_684735" href="http://shop.highlights.com/webapp/wcs/stores/servlet/ProductDisplay?storeId=16151&amp;productId=685223&amp;catalogId=17603&amp;categoryId=241895"><img class="single_product_image" id="single_product_image_684735" src="homepagetestLOCAL_files/006627.jpg"></a>
+		</div>
+	
+	
+		<div class="product_name" id="single_product_name_684735">
+			<a class="a_single_product_image" href="http://shop.highlights.com/webapp/wcs/stores/servlet/ProductDisplay?storeId=16151&amp;productId=685223&amp;catalogId=17603&amp;categoryId=241895">Deluxe Sun Catcher Kit</a>
+		</div>
+
+				<div class="product_price" id="single_product_price_684735">$24.98</div>
+
+</div>
+<!-- End - JSP File name:  SingleProductDisplay.jsp --> 
+					</td>
+				
+					<td class="td_multiple_products_row_column" valign="top">
+<!-- Start - JSP File name:  SingleProductDisplay.jsp -->
+
+<div class="Div_single_product">
+<div class="product_image" id="single_product_image_685244">
+			<a class="a_single_product_image" id="a_single_product_image_685244" href="http://shop.highlights.com/webapp/wcs/stores/servlet/ProductDisplay?storeId=16151&amp;productId=685244&amp;catalogId=17603&amp;categoryId=241897"><img class="single_product_image" id="single_product_image_685244" src="homepagetestLOCAL_files/008705.jpg"></a>
+		</div>
+	
+		<div class="product_name" id="single_product_name_685244">
+			<a class="a_single_product_image" href="http://shop.highlights.com/webapp/wcs/stores/servlet/ProductDisplay?storeId=16151&amp;productId=685244&amp;catalogId=17603&amp;categoryId=241897">Hidden Picture Set of 4 Wipe-Off Posters</a>
+		</div>
+	
+				<div class="product_price" id="single_product_price_685244">$19.98</div>
+
+</div>
+<!-- End - JSP File name:  SingleProductDisplay.jsp --> 
+					</td>
+
+			</tr>
+
+	</tbody></table>
+
+
+<!-- End - JSP File name:  MultipleProductsDisplay.jsp -->
+
+		</div>
+		
+<!-- IMAGE MAP FOR FEATURE IPHONE AD -->
+
+<map id="iphonemap" name="iphonemap">
+<area shape="rect" coords="170,184,788,213" alt="Buy Hidden Pictures for your iPhone and iPod touch!" title="Buy Hidden Pictures for your iPhone and iPod touch!" href="http://itunes.com/apps/highlightshiddenpictures">
+<area shape="poly" coords="0,0,466,0,466,228,295,228,295,178,168,178,168,228,0,228" alt="Play Hidden Pictures on your iPhone and iPod touch!" title="Play Hidden Pictures on your iPhone and iPod touch!" href="http://www.highlights.com/hidden-pictures-iphone-game">
+</map>
+
+<!--iPhone image info <div id="mainfeatureblock"><a href="//www.highlights.com/hidden-pictures-iphone-game" title="Play Hidden Pictures on your iPhone and iPod touch!"><img src="img-hfcsite-main/home-feature-iphone.jpg" alt="Play Hidden Pictures on your iPhone and iPod touch!" usemap="#iphonemap"></a></div>-->  </div>
+
+  <div class="clear-block">
+    <div class="meta">
+          <div class="terms"><ul class="links inline"><li class="taxonomy_term_54 first last"><a href="http://www.highlights.com/taxonomy/term/54" rel="tag" title="">Home</a></li>
+</ul></div>
+        </div>
+
+      </div>
+
+</div>
+</div><!-- end mainmiddlecol div -->
+			
+<div id="mainrightcol"><!-- begin mainrightcol div -->
+	<div id="block-block-39" class="clear-block block block-block">
+
+
+  <div class="content"><!-- BLOCK: NO on-page Shopping Cart -->
+<div style="margin-right:20px;"><a href="https://shop.highlights.com/webapp/wcs/stores/servlet/OrderCalculate?langId=-1&amp;storeId=16151&amp;catalogId=17603&amp;URL=OrderItemDisplay" title="Shopping Cart"><img src="homepagetestLOCAL_files/shopcart_bt.gif" alt="Shopping Cart"></a></div></div>
+</div>
+<div id="block-block-62" class="clear-block block block-block">
+
+
+  <div class="content"><!-- BLOCK: home test right column -->
+
+<div class="bluehomebox" style="">
+	<div class="top" style=""><img src="img-hfcsite-main/rightbluebox-top.gif" width="182" height="26" alt=""></div>
+	<div class="center" style="background-image:url('img-hfcsite-main/rightbluebox-background.gif'); background-repeat:repeat; background-position:left top; padding:0px 15px;">
+	<h2 style="margin:0 0 16px 0;">Highlights Clubs</h2>
+	<div><a href="http://shop.highlights.com/webapp/wcs/stores/servlet/ProductDisplay?storeId=16151&catalogId=17603&categoryId=241891&productId=686723"><img src="http://media.highlights.com/img-hfcsite-prod-thumb/HP001.jpg" width="100" height="100" style="border:2px solid #b5c7d7;" alt=""></a></div>
+	<p><strong><a href="http://shop.highlights.com/webapp/wcs/stores/servlet/ProductDisplay?storeId=16151&catalogId=17603&categoryId=241891&productId=686723" class="hoverunderline" style="color:#2351a7;">Hidden Pictures Playground</a></strong></p>
+	
+	<div><a href="http://shop.highlights.com/webapp/wcs/stores/servlet/ProductDisplay?storeId=16151&catalogId=17603&categoryId=241891&productId=692725"><img src="http://media.highlights.com/img-hfcsite-prod-thumb/puzzle-buzz.jpg" width="100" height="100" style="border:2px solid #b5c7d7;" alt=""></a></div>
+	<p><strong><a href="http://shop.highlights.com/webapp/wcs/stores/servlet/ProductDisplay?storeId=16151&catalogId=17603&categoryId=241891&productId=692725" class="hoverunderline" style="color:#2351a7;">Puzzle Buzz</a></strong></p>
+	
+	<div><a href="http://shop.highlights.com/webapp/wcs/stores/servlet/ProductDisplay?storeId=16151&catalogId=17603&categoryId=241891&productId=690724"><img src="http://media.highlights.com/img-hfcsite-prod-thumb/which-way-usa.jpg" width="100" height="100" style="border:2px solid #b5c7d7;" alt=""></a></div>
+	<p><strong><a href="http://shop.highlights.com/webapp/wcs/stores/servlet/ProductDisplay?storeId=16151&catalogId=17603&categoryId=241891&productId=690724" class="hoverunderline" style="color:#2351a7;">Which Way USA</a></strong></p>
+	
+	<div><a href="http://shop.highlights.com/webapp/wcs/stores/servlet/ProductDisplay?storeId=16151&catalogId=17603&categoryId=241891&productId=690725"><img src="http://media.highlights.com/img-hfcsite-prod-thumb/top-secret-adventures.jpg" width="100" height="100" style="border:2px solid #b5c7d7;" alt=""></a></div>
+	<p><strong><a href="http://shop.highlights.com/webapp/wcs/stores/servlet/ProductDisplay?storeId=16151&catalogId=17603&categoryId=241891&productId=690725" class="hoverunderline" style="color:#2351a7;">Top Secret Adventures</a></strong></p>
+	
+	<div><a href="http://shop.highlights.com/webapp/wcs/stores/servlet/ProductDisplay?storeId=16151&catalogId=17603&categoryId=241891&productId=692723"><img src="http://media.highlights.com/img-hfcsite-prod-thumb/mathmania.jpg" width="100" height="100" style="border:2px solid #b5c7d7;" alt=""></a></div>
+	<p><strong><a href="http://shop.highlights.com/webapp/wcs/stores/servlet/ProductDisplay?storeId=16151&catalogId=17603&categoryId=241891&productId=692723" class="hoverunderline" style="color:#2351a7;">Mathmania</a></strong></p>
+	
+	<div><a href="http://shop.highlights.com/webapp/wcs/stores/servlet/ProductDisplay?storeId=16151&catalogId=17603&categoryId=241891&productId=692724"><img src="http://media.highlights.com/img-hfcsite-prod-thumb/puzzlemaniaNew.jpg" width="100" height="100" style="border:2px solid #b5c7d7;" alt=""></a></div>
+	<p><strong><a href="http://shop.highlights.com/webapp/wcs/stores/servlet/ProductDisplay?storeId=16151&catalogId=17603&categoryId=241891&productId=692724" class="hoverunderline" style="color:#2351a7;">Puzzlemania</a></strong></p>
+	
+
+	</div>
+
+	
+	<div class="bottom"><img src="img-hfcsite-main/rightbluebox-bottom.gif" width="182" height="28" alt=""></div>
+</div>
+  
+  
+
+
+</div>
+</div>
+</div><!-- end mainrightcol div -->
+		<div class="clr"></div>
+		<!-- end 3 column area -->
+		
+	</div><!-- end main div -->
+</div><!-- end mainouter div -->
+
+<div id="footerouter"><!-- begin footerouter div -->
+	<div id="block-block-12" class="clear-block block block-block">
+
+
+  <div class="content"><!-- BLOCK: Hide Taxonomy Terms -->
+<style type="text/css">.terms {display:none;}</style></div>
+</div>
+<div id="block-block-2" class="clear-block block block-block">
+
+
+  <div class="content"><!-- BLOCK: footerNavigation -->
+			
+	<div id="footer"><!-- begin footer div -->
+		<ul>
+			<li><a href="http://www.highlights.com/newsletter-preferences-subscribe" name="&amp;lid=Customer_Service&amp;lpos=footer" class="hoverunderline">Email Newsletters</a></li>
+			<li><a href="http://www.highlights.com/login-my-account" name="&amp;lid=Customer_Service&amp;lpos=footer" class="hoverunderline">My Account</a></li>
+			<li><a href="http://www.highlights.com/customer-service-main" name="&amp;lid=Customer_Service&amp;lpos=footer" class="hoverunderline">Customer Service</a></li>
+			<li><a href="http://www.highlights.com/about-us" class="hoverunderline">About Us</a></li>
+			<li><a href="http://www.highlights.com/working-for-highlights" name="&amp;lid=Contact_Us&amp;lpos=footer" class="hoverunderline">Careers</a></li>
+			<li><a href="http://www.highlights.com/newsroom-home" name="&amp;lid=Contact_Us&amp;lpos=footer" class="hoverunderline">Newsroom</a></li>
+			<li><a href="http://www.highlights.com/contact-us" name="&amp;lid=Contact_Us&amp;lpos=footer" class="hoverunderline">Contact Us</a></li>
+			<li><a href="http://www.highlights.com/privacy-and-security" class="hoverunderline">Privacy Policy</a></li>
+			<li><a href="http://www.highlights.com/terms-of-use" class="hoverunderline">Terms of Use</a></li>
+			<li><a href="http://www.highlights.com/site-map" class="hoverunderline">Site Map</a></li>
+		</ul>
+	</div><!-- end footer div --></div>
+</div>
+	<div id="underfooter">© Highlights for Children</div>
+</div><!-- end footerouter div -->
+
+<!-- Begin: 4q.iperceptions.com -->
+<script src="homepagetestLOCAL_files/1.txt" type="text/javascript" defer="defer">
+</script>
+<!-- End: 4q.iperceptions.com -->
+
+
+
+<!-- Display tracking code: begin -->
+
+<script language="JavaScript" type="text/javascript">
+s.pageName	= "content:home:home page test";
+s.channel	= "content";
+s.prop1		= "content:home";
+s.prop2		= "";
+s.prop3		= "";
+s.prop34	= "content";
+
+/************* DO NOT ALTER ANYTHING BELOW THIS LINE ! **************/
+var s_code=s.t();if(s_code)document.write(s_code)//-->
+</script><script src="homepagetestLOCAL_files/standard.txt" language="JavaScript"></script>
+<!-- Display tracking code: end -->
+
+<!-- begin add ROI trax code (OneUpWeb)-->
+ <!-- Not displayed on Magazine Pages -->
+<script type="text/javascript" src="homepagetestLOCAL_files/rts.js"></script><iframe src="homepagetestLOCAL_files/rts.htm" scrolling="no" width="0" frameborder="0" height="0"></iframe>
+
+<!-- end add ROI trax code-->
+
+<!-- ClickTale Bottom part -->
+<div id="ClickTaleDiv" style="display: none;"></div>
+<script src="homepagetestLOCAL_files/WRb.js" type="text/javascript"></script>
+<script type="text/javascript">
+var ClickTaleSSL=1;
+if(typeof ClickTale=='function') ClickTale(15101,0.023,"www");
+</script>
+<!-- ClickTale end of Bottom part -->
+
+</body></html>

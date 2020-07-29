@@ -1,0 +1,323 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html;charset=ISO-8859-1" />
+		<title>Adam Caouette, Designer</title>
+		<script language="javascript" src="js/jquery.js"></script>
+		<script language="javascript" src="js/thickbox.js"></script>
+		<script language="javascript" src="js/rollover.js"></script>
+		<link rel="stylesheet" href="css/styles.css" type="text/css" media="screen" />
+		<link rel="stylesheet" href="css/thickbox.css" type="text/css" media="screen" />
+		<script type="text/javascript">
+
+/*
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-17494895-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();  
+  */
+
+  
+function changeOrder(whichPortSet) {
+	
+	var selectorString = '#port'+whichPortSet+' div.portImages a';
+	//alert(selectorString);
+	var totalInSet = $(selectorString).length;
+	//alert(totalInSet);
+	if (totalInSet == 3) {
+		var topLevel = 30;
+		var bottomLevel = 10;
+	} else if (totalInSet == 2) {
+		var topLevel = 30;
+		var bottomLevel = 20;
+	} 
+	
+	for (i = 1; i <= totalInSet; i++) {
+		//alert('running '+i+' now...');
+		var currElement = '#port'+whichPortSet+' div.portImages div.portImage0'+i;
+		var currZ = $(currElement).css('z-index');
+		//alert('currZ is: '+currZ);
+		var parsedZ = parseInt(currZ);
+		var newZ = parsedZ+10;
+		if (currZ < topLevel) {
+			$(currElement).css('z-index',newZ);
+		} else {
+			$(currElement).css('z-index',bottomLevel);
+		}
+	}
+		
+}
+
+function showArrows(whichPortSet) {
+	/* DO NOT USE FOR NOW
+	var selectorString = '#port'+whichPortSet+' div.doublearrow-UR, #port'+whichPortSet+' div.doublearrow-LL';
+	$(selectorString).css('visibility','visible');
+	*/
+}
+
+function hideArrows(whichPortSet) {
+	/* DO NOT USE FOR NOW
+	var selectorString = '#port'+whichPortSet+' div.doublearrow-UR, #port'+whichPortSet+' div.doublearrow-LL';
+	$(selectorString).css('visibility','hidden');
+	*/
+}
+
+function setup() {
+	// put all run 1x setup items here
+	
+	// run through all port sets
+	var totalPortSets = $('div.portImages').length;
+	
+	for (i = 1; i <= totalPortSets; i++) {
+		var whichPortSet = i;
+		var whichPortSetStr = "";
+		if (whichPortSet < 10) { // adds an "0" before single-digit numbers
+			whichPortSetStr = "0"+whichPortSet;
+		} else {
+			whichPortSetStr = whichPortSet;
+		}
+		whichPortSetStr = "#port"+whichPortSetStr;
+		//alert(whichPortSetStr);
+		// run through all port elements in each set
+		var selectorString = whichPortSetStr+" div.portImages a img";
+		var totalPortElements = $(selectorString).length;
+		var longestHeight = 0; // declare vars with dummy values
+		var widthForMarginLeft = 0; // declare vars with dummy values
+		
+		for (y = 1; y <= totalPortElements; y++) {
+			var whichPortElement = y;
+			
+			// change link references to hi-res real images
+			var whichImageID = "image"+whichPortSet+"-"+whichPortElement;
+			var whichImageRef = "images/"+whichPortSet+"-"+whichPortElement+".jpg"
+			//alert(whichImageID+" "+whichImageRef);
+			var objectToGet = document.getElementById(whichImageID);
+			objectToGet.src=whichImageRef;
+			
+			// get width and height of images
+			var selectorString = whichPortSetStr+" div.portImage0"+whichPortElement+" a img";
+			var thisElementWidth = $(selectorString).width();
+			var thisElementHeight = $(selectorString).height();
+			//alert("height of "+selectorString+"is: "+thisElementHeight);
+			// get longestHeight
+			if (longestHeight < thisElementHeight) {
+				longestHeight = thisElementHeight;
+			}
+			// get widthForMarginLeft
+			if (y == 1 && widthForMarginLeft < thisElementWidth) {
+				widthForMarginLeft = thisElementWidth+40;
+			} else if (y == 2 || y == 3) {
+				widthForMarginLeft = widthForMarginLeft+20
+			}
+			
+			// set #portXX div.portImageNN for each element's width, height, and background image
+			/*
+			var thisImageString = whichPortSetStr + " div.portImage0"+whichPortElement;
+			var thisElementWidthPlus = thisElementWidth + 42;
+			var thisElementHeightPlus = thisElementHeight + 40;
+			var thisElementBackgroundStyles = "url('images/"+whichPortSet+"-"+whichPortElement+".jpg') no-repeat 22px 20px"
+			$(thisImageString).css({
+			'width': thisElementWidthPlus+"px",
+			'height': thisElementHeightPlus+"px",
+			'background': thisElementBackgroundStyles
+			});
+			*/
+			
+			
+		}
+		
+		longestHeight = longestHeight+50;
+		longestHeight = longestHeight+"px";
+		// set #portXX for height
+		/*
+		$(whichPortSetStr).css({
+			'height': longestHeight
+			});
+		*/
+		//var testing = $(whichPortSetStr).css('height');
+		//alert(testing);
+		
+		// set #portXX .portText for left margin value
+		// var whichPortText = whichPortSetStr+" .portText"
+		// $(whichPortText).css('margin-left',widthForMarginLeft);
+		
+	}
+
+			
+			// set arrows selector strings
+			// var selectArrowsUR = whichPortSetStr+' div.portImages div.doublearrow-UR';
+			// var selectArrowsLL = whichPortSetStr+' div.portImages div.doublearrow-LL';
+			// set arrow graphic UR placement
+			// var arrowsURleftValue = thisFirstElementWidth+32; // this is 10 less than the 42 added to the width of the item
+			// var arrowsURleftValue = arrowsURleftValue+"px";
+			//$(selectArrowsUR).css('left',arrowsURleftValue);
+
+}
+
+
+
+
+
+$(document).ready(function() {
+		//setup();
+
+		$('#topText a.more').click(function() {
+			$('#topText span.more').css('display','none');
+			$('#topText span.sentence-end').css('display','inline');
+			$('#topTextFull').slideDown('slow');
+
+			});
+			
+		$('#topTextFull a.more').click(function() {
+			$('#topTextFull').slideUp('slow');
+			$('#topText span.more').css('display','inline');
+			$('#topText span.sentence-end').css('display','none');
+			});
+		
+});
+
+function showAbout() {
+	$(document).ready(function() {
+		$('#topText span.more').css('display','none');
+		$('#topText span.sentence-end').css('display','inline');
+		$('#topTextFull').slideDown('slow');
+		scrollToTop();
+	});
+}
+
+function hideAbout() {
+	$(document).ready(function() {
+		$('#topTextFull').slideUp('slow');
+		$('#topText span.more').css('display','inline');
+		$('#topText span.sentence-end').css('display','none');
+		scrollToTop();
+	});
+}
+
+function scrollToTop() {
+	window.scrollTo(0,0);
+}
+  
+</script>
+
+	</head>
+
+	<body marginheight="0" marginwidth="0" topmargin="0" leftmargin="0">
+		<a name="top"></a>
+		<div id="floatingNav">
+			<a href="/index.html#top" onclick="javascript:hideAbout()"><h1 class="textAsImage">Studio Adam</h1></a>
+			<div id="floatingNavLinks">
+				<p><a href="#top" onclick="javascript:showAbout()">ABOUT</a></p>
+				<p><a href="#portfolio" >PORT-<br />FOLIO</a></p>
+				<p><a href="resume.html?height=800&width=760" onclick="javascript:hideAbout()" class="thickbox">RESUME</a></p>
+			</div>
+		</div>
+		<div class="totop"><a href="#top" onclick="javascript:scrollToTop()"><img src="images/toTop.png" /></a></div>
+		<div id="container"><!-- BEGIN CONTAINER DIV -->
+			<div id="topText"><!-- BEGIN topText DIV -->
+				<h2 id="head01" class="textAsImage">Adam Caouette - Designer</h2>
+				<p>I am a senior-level designer with 13 years experience creating professional design solutions for both web and print.</p>
+				<p>I believe in providing online customers positive user experiences. My goal is to deliver clients' brand messages with useful and rewarding user-centered design, resulting in<span class="more">... <a href="#" class="more">read more about Adam <img src="images/arrow-dn.png" /></a></span><span class="sentence-end"> customer loyalty over time.</span></p>
+			</div><!-- END topText DIV -->
+			<div id="topTextFull"><!-- BEGIN topTextFull DIV -->
+				<h3>Experience</h3>
+								<ul class="firstcol"><li>visual design with brand consistency</li>
+									<li>web site architecture and content</li>
+									<li>web usability and user experience (UX)</li></ul>
+								<ul class="secondcol"><li>search engine optimization (SEO)</li>
+									<!--<li>site implementation</li>-->
+									<li>web browser compatibility and QA testing</li>
+									<li>content management</li></ul>
+									<p>In addition to screen-based work, I also have created clean and effective print designs for catalogs, brochures, and advertisements to clients' satisfaction while meeting goals and budgets.</p>
+								<h3>Technical Skills</h3>
+								<ul><li>Adobe Creative Suite (Photoshop, Illustrator, Flash, Acrobat, InDesign, Dreamweaver)</li>
+									<li>XHTML, CSS, AJAX, JavaScript, Actionscript, some PHP and JSP</li>
+									<li>Content Management Systems (CMS) including MovableType, WordPress, Drupal</li>
+									<li>Video Editing, Photography</li></ul>
+									<p>Finally, I have proven myself to be an effective project manager, responsible for successfully leading teams to meet project deadlines on repeated occasions.</p>
+								<p><strong>If you need help arriving at the best combination of message and design to maximize response without sacrificing usability or common sense, contact me&mdash;I'm up for the challenge!</strong></p>
+								<p class="less"><a href="#" class="more">OK, I've read enough; hide all these words... <img src="images/arrow-up.png" /></a></p>
+			</div><!-- END topTextFull DIV -->
+			<a name="portfolio"></a>
+			<div id="portfolioSection"><!-- BEGIN portfolioSection DIV -->
+				<h2 id="head02" class="textAsImage">Portfolio</h2>
+				<p>View some of the work I have done as a <strong>Designer</strong> and <strong>Web / Interactive Developer</strong> below. Click on an image to see more images.<!--<a href="#">Art Director</a>, <a href="#">Designer</a>, or <a href="#">Web / Interactive Developer</a>.--></p>
+			</div><!-- END portfolioSection DIV -->
+			
+			<!-- ================== -->
+			
+			<div id="port01">
+				<div class="portImages">
+					<div class="portImage01">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/1-1.jpg" onClick="changeOrder('01');return false" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image1-1" src="images/spacer.gif"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+					</div>
+					<div class="portImage02">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/1-2.jpg" onClick="changeOrder('01');return false" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image1-2" src="images/spacer.gif"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+					</div>
+					<div class="portImage03">
+						<div class="shadowback-upper"><div class="shadowback-UL"><a href="images/1-3.jpg" onClick="changeOrder('01');return false" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image1-3" src="images/spacer.gif"></a></div><div class="shadowback-UR"></div></div>
+						<div class="shadowback-lower"><div class="shadowback-LL"></div><div class="shadowback-LR"></div></div>
+					</div>
+				</div>
+				<div class="portText">
+					<div class="tabLabel"><img src="images/tablabel-Wdesign.png" /></div>
+					<h3>HIGHLIGHTS FOR CHILDREN <br />Web Site</h3>
+					<p>Redesigned and maintained Highlights' online brand vehicle including ecommerce store and subscription support.</p>
+					<h4>ACHIEVEMENTS</h4>
+					<ul><li>Redesign of entire site (navigation, layout, graphics) helped increase overall site conversion by 0.9%</li>
+					<li>Coded site using HTML, CSS, Javascript and Drupal</li>
+					<li>Teamed with programmers to create the site back-end as well as search capability</li>
+					<li>Optimized content and META tags for search engines (SEO)</li></ul>
+					<h4>LINK TO LIVE SITE</h4>
+					<p><a href="http://www.highlights.com" target="_blank" class="bluelink">www.highlights.com</a></p>
+				</div>
+				<div class="clr"></div>
+			</div>	
+			
+			<div id="Nport01">
+				<div class="NportImages">
+					<div class="NportImage01">
+						<div class="Nshadowback-upper"><div class="Nshadowback-UL"><a href="images/1-1.jpg" onClick="changeOrder('01');return false" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image1-1" src="images/spacer.gif"></a></div><div class="Nshadowback-UR"></div></div>
+						<div class="Nshadowback-lower"><div class="Nshadowback-LL"></div><div class="Nshadowback-LR"></div></div>
+					</div>
+					<div class="NportImage02">
+						<div class="Nshadowback-upper"><div class="Nshadowback-UL"><a href="images/1-2.jpg" onClick="changeOrder('01');return false" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image1-2" src="images/spacer.gif"></a></div><div class="Nshadowback-UR"></div></div>
+						<div class="Nshadowback-lower"><div class="Nshadowback-LL"></div><div class="Nshadowback-LR"></div></div>
+					</div>
+					<div class="NportImage03">
+						<div class="Nshadowback-upper"><div class="Nshadowback-UL"><a href="images/1-3.jpg" onClick="changeOrder('01');return false" alt="SHOW NEXT IMAGE" title="SHOW NEXT IMAGE"><img id="image1-3" src="images/spacer.gif"></a></div><div class="Nshadowback-UR"></div></div>
+						<div class="Nshadowback-lower"><div class="Nshadowback-LL"></div><div class="Nshadowback-LR"></div></div>
+					</div>
+				</div>
+				<div class="NportText">
+					<div class="tabLabel"><img src="images/tablabel-Wdesign.png" /></div>
+					<h3>HIGHLIGHTS FOR CHILDREN <br />Web Site</h3>
+					<p>Redesigned and maintained Highlights' online brand vehicle including ecommerce store and subscription support.</p>
+					<h4>ACHIEVEMENTS</h4>
+					<ul><li>Redesign of entire site (navigation, layout, graphics) helped increase overall site conversion by 0.9%</li>
+					<li>Coded site using HTML, CSS, Javascript and Drupal</li>
+					<li>Teamed with programmers to create the site back-end as well as search capability</li>
+					<li>Optimized content and META tags for search engines (SEO)</li></ul>
+					<h4>LINK TO LIVE SITE</h4>
+					<p><a href="http://www.highlights.com" target="_blank" class="bluelink">www.highlights.com</a></p>
+				</div>
+				<div class="clr"></div>
+			</div>
+			
+			
+			
+		</div><!-- END CONTAINER DIV -->
+
+	</body>
+
+</html>
+
+

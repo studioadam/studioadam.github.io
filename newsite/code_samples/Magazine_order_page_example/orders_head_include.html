@@ -1,0 +1,152 @@
+<script type="text/javascript" src="https://w1.buysub.com/javascript/jquery/jquery-1.4.2.min.js"></script>
+<!--The following code is required for this page to function correctly.  Please do not alter in any way-->
+<script type="text/javascript">
+	function doDelete(sequenceNumber) {
+		var stan = document.getElementById('cds_donee_seq_no');
+		stan.value = sequenceNumber;
+	}
+	function toggleDoneeInfo(control) {
+    if (control.checked) {
+        document.getElementById('Donee_info').style.display = 'block';
+		document.getElementById('cds_form_expanded_ind').checked = 'true';
+    } else {
+        document.getElementById('Donee_info').style.display = 'none';
+    }
+}
+	function doOnload() {
+    if (document.getElementById('cds_form_expanded_ind').checked) {
+        document.getElementById('Donee_info').style.display = 'block';
+    }
+}
+	function toggleDoneeInfoDes(control) {
+        document.getElementById('Donee_info').style.display = 'none';
+}
+	</script>
+<!--The previous code is required for this page to function correctly.  Please do not alter in any way-->
+<script type="text/javascript">
+$(document).ready(function(){
+						   
+	$(".popaddr").click(function () {
+		//var checked = $(this).attr('checked');
+		var doneeNum = $(this).attr('id');
+		if($(this).attr('checked') == true){			
+			$(':input[name="'+doneeNum+'_address_1"]').val($(":input[name='cds_address_1']").val());
+			$(':input[name="'+doneeNum+'_address_2"]').val($(":input[name='cds_address_2']").val());
+			$(':input[name="'+doneeNum+'_city"]').val($(":input[name='cds_city']").val());
+			$(':input[name="'+doneeNum+'_state"]').val($(":input[name='cds_state']").val());
+			$(':input[name="'+doneeNum+'_country"]').val($(":input[name='cds_country']").val());
+			$(':input[name="'+doneeNum+'_zip"]').val($(":input[name='cds_zip']").val());
+			$(':input[name="'+doneeNum+'_postal"]').val($(":input[name='cds_postal']").val());
+			whichCountry = $(":input[name='cds_country']").val();
+			//alert("whichCountry is: "+whichCountry);
+			displayTerms(whichCountry);
+		}
+		else {
+		$(':input[name^='+doneeNum+']').val("");
+		}
+	  });	
+});
+</script>
+
+
+
+<style type="text/css">
+
+/* custom CSS - STH 8-18-2010 */		
+#usaTermsValues {
+display:block;
+}
+#canTermsValues {
+display:none;
+}
+#intTermsValues {
+display:none;
+}
+#donor_postal {
+display:none;
+}
+#donee1_postal {
+display:none;
+}
+#AltPricingMsg1, #AltPricingMsg2, #AltPricingMsg3 {
+margin-bottom:14px;
+}
+#AltPricingMsg2, #AltPricingMsg3 {
+display:none;
+}
+/* end custom CSS */
+</style>
+
+
+<script> //custom script added by STH 8/18/2010
+function displayTerms(country){
+	countryName = country;
+	if(countryName == "United States"){
+		document.getElementById("usaTermsValues").style.display = "block";
+		document.getElementById("canTermsValues").style.display = "none";
+		document.getElementById("intTermsValues").style.display = "none";
+		document.getElementById("donee1_zip").style.display = "block";
+		document.getElementById("donee1_postal").style.display = "none";
+		$('#donee1_zip label').html('Zip*<br>');
+		document.getElementById("AltPricingMsg1").style.display = "block";
+		document.getElementById("AltPricingMsg2").style.display = "none";
+		document.getElementById("AltPricingMsg3").style.display = "none";
+	}
+	else if(countryName == "Canada"){
+		document.getElementById("usaTermsValues").style.display = "none";
+		document.getElementById("canTermsValues").style.display = "block";
+		document.getElementById("intTermsValues").style.display = "none";
+		document.getElementById("donee1_zip").style.display = "block";
+		document.getElementById("donee1_postal").style.display = "none";
+		$('#donee1_zip label').html('Postal*<br>');
+		document.getElementById("AltPricingMsg1").style.display = "none";
+		document.getElementById("AltPricingMsg2").style.display = "block";
+		document.getElementById("AltPricingMsg3").style.display = "none";
+	}
+	else if(countryName != ""){
+		document.getElementById("usaTermsValues").style.display = "none";
+		document.getElementById("canTermsValues").style.display = "none";
+		document.getElementById("intTermsValues").style.display = "block";
+		document.getElementById("donee1_zip").style.display = "none";
+		document.getElementById("donee1_postal").style.display = "block";
+		$('#donee1_state label').html('State<br>');
+		document.getElementById("AltPricingMsg1").style.display = "none";
+		document.getElementById("AltPricingMsg2").style.display = "none";
+		document.getElementById("AltPricingMsg3").style.display = "block";
+	}
+}
+
+function displayDonorPostal(country){
+	countryName = country;
+	if(countryName == "United States"){
+		document.getElementById("donor_zip").style.display = "block";
+		document.getElementById("donor_postal").style.display = "none";
+		$('#donor_zip label').html('Zip*<br>');
+	}
+	else if(countryName == "Canada"){
+		document.getElementById("donor_zip").style.display = "block";
+		document.getElementById("donor_postal").style.display = "none";
+		$('#donor_zip label').html('Postal*<br>');
+	}
+	else if(countryName != ""){
+		document.getElementById("donor_zip").style.display = "none";
+		document.getElementById("donor_postal").style.display = "block";
+		$('#donor_state label').html('State<br>');
+	}
+}
+
+function resetOnReload() {
+	if(document.engage.cds_country.value != "" && document.engage.cds_country.value != "Select") {
+		countryName = document.engage.cds_country.value;
+
+		displayDonorPostal(countryName);
+	}
+	
+	if(document.engage.cds_donee1_country.value != "" && document.engage.cds_donee1_country.value != "Select") {
+		countryName = document.engage.cds_donee1_country.value;
+
+		displayTerms(countryName);
+	}
+
+}
+</script>
